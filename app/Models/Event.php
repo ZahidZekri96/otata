@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Event extends Model
+{
+    use HasFactory;
+
+    protected $table = 'event';
+
+    protected $fillable = [
+        'event', 'event_date', 'event_time', 'description', 'type', 'link'
+    ];
+
+    protected $dates = [
+        'deleted_at','created_at', 'updated_at'
+    ];
+
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship
+    |--------------------------------------------------------------------------
+    */
+    /*
+    |--------------------------------------------------------------------------
+    | End Relationship
+    |--------------------------------------------------------------------------
+    */
+
+
+    //get event list
+    public function getEventList($selector="*", $order="ASC", $status="all")
+    {
+        $getEvent = Event::select($selector)
+                        ->orderBy('id',$order);
+
+        return $getEvent->get();
+    }
+
+    //get free event list
+    public function getPaidEventList($selector="*", $order="ASC", $status="all")
+    {
+        $getEvent = Event::select($selector)
+                        ->where("type" , "paid")
+                        ->orderBy('id',$order);
+
+        return $getEvent->get();
+    }
+
+    //get paid event list
+    public function getFreeEventList($selector="*", $order="ASC", $status="all")
+    {
+        $getEvent = Event::select($selector)
+                        ->where("type" , "free")
+                        ->orderBy('id',$order);
+
+        return $getEvent->get();
+    }
+
+    public function getEventById($id)
+    {
+        $getData = Event::find($id);
+
+        return $getData;
+    }
+}
+
