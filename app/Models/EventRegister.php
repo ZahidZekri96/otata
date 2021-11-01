@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class EventRegister extends Model
 {
     use HasFactory;
 
-    protected $table = 'event';
+    protected $table = 'event_register';
 
     protected $fillable = [
-        'event', 'event_date', 'event_time', 'description', 'type', 'link'
+        'event_id', 'user_id'
     ];
 
     protected $dates = [
@@ -28,12 +28,6 @@ class Event extends Model
     | Relationship
     |--------------------------------------------------------------------------
     */
-
-    public function event_register()
-    {
-        return $this->hasMany(EventRegister::class, 'event_id', 'id');
-    }
-
     /*
     |--------------------------------------------------------------------------
     | End Relationship
@@ -44,28 +38,7 @@ class Event extends Model
     //get event list
     public function getEventList($selector="*", $order="ASC", $status="all")
     {
-        $getEvent = Event::select($selector)
-                        ->with('event_register')
-                        ->orderBy('id',$order);
-
-        return $getEvent->get();
-    }
-
-    //get free event list
-    public function getPaidEventList($selector="*", $order="ASC", $status="all")
-    {
-        $getEvent = Event::select($selector)
-                        ->where("type" , "paid")
-                        ->orderBy('id',$order);
-
-        return $getEvent->get();
-    }
-
-    //get paid event list
-    public function getFreeEventList($selector="*", $order="ASC", $status="all")
-    {
-        $getEvent = Event::select($selector)
-                        ->where("type" , "free")
+        $getEvent = EventRegister::select($selector)
                         ->orderBy('id',$order);
 
         return $getEvent->get();
@@ -73,7 +46,7 @@ class Event extends Model
 
     public function getEventById($id)
     {
-        $getData = Event::find($id);
+        $getData = EventRegister::find($id);
 
         return $getData;
     }

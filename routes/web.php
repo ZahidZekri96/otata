@@ -30,7 +30,8 @@ Route::group(['prefix' => 'main'], function(){
 });
 
 Route::group(['prefix' => 'event'], function(){
-    Route::get('/list', 'App\Http\Controllers\EventController@index')->name('list.free');
+    Route::get('/list', 'App\Http\Controllers\EventController@index')->name('event.list');
+    Route::get('/data', 'App\Http\Controllers\EventController@apiGetIndexDt')->name('event.dt');
     Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('event.add');
 });
 
@@ -64,6 +65,29 @@ Route::group(['prefix' => 'report'], function(){
     Route::get('/summary', 'App\Http\Controllers\ReportController@summary')->name('report.summary');
     Route::get('/event', 'App\Http\Controllers\ReportController@event')->name('report.event');
 });
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'member'], function(){
+    Route::get('/main', 'App\Http\Controllers\MainController@index')->name('main');
+
+    Route::group(['prefix' => 'event'], function(){
+        Route::get('/list', 'App\Http\Controllers\EventController@index_member')->name('member.event.list');
+        Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
+        Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+    });
+
+    Route::group(['prefix' => 'donation'], function(){
+        Route::get('/', 'App\Http\Controllers\DonationController@memberIndex')->name('member.donation');
+        Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
+        Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+    });
+
+    Route::group(['prefix' => 'subscription'], function(){
+        Route::get('/', 'App\Http\Controllers\SubscriptionController@memberIndex')->name('member.subscription');
+        Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
+        Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+    });
+});

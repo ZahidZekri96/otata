@@ -9,7 +9,7 @@ class OrderPurchPaymentToyyibpay extends Model
 {
     use HasFactory;
 
-    protected $table = 'order_purch_payment_toyyibpay';
+    protected $table = 'order_purch_payment_senangpay';
 
     protected $fillable = [
         'order_purch_pay_id	', 'toyyibpay_billcode', 'state', 'status', 'type'

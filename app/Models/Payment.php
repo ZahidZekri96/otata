@@ -9,10 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $table = 'order_purch_payment_toyyibpay';
+    protected $table = 'payment';
 
     protected $fillable = [
-        'id	', 'order_id', 'cost'
+        'id	', 'order_id', 'cost', 'payment_type'
     ];
 
     protected $dates = [

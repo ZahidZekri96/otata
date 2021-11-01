@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth.auth-layout')
 
 @section('content')
 <div class="container">
@@ -56,6 +56,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
