@@ -71,7 +71,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'member'], function(){
-    Route::get('/main', 'App\Http\Controllers\MainController@index')->name('main');
+    Route::get('/main', 'App\Http\Controllers\MemberMainController@index')->name('main');
 
     Route::group(['prefix' => 'event'], function(){
         Route::get('/list', 'App\Http\Controllers\EventController@index_member')->name('member.event.list');

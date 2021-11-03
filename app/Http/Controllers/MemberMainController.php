@@ -8,7 +8,8 @@ use App\Models\Event;
 use App\Models\EventRegister;
 use App\Models\User;
 
-class MainController extends Controller
+
+class MemberMainController extends Controller
 {
     public function index()
     {
@@ -18,6 +19,6 @@ class MainController extends Controller
         
         $getPaidEvent = Event::where("type" , "paid")->take(5)->get();
 
-        return view('dashboard.index', compact('title', 'getFreeEvent', 'getPaidEvent'));
+        return view('member.dashboard.index', compact('title', 'getFreeEvent', 'getPaidEvent'));
     }
 }
