@@ -36,6 +36,15 @@ class EventController extends Controller
         return view('member.event.list.index', compact('title', 'getEvent' , 'getFreeEvent' , 'getPaidEvent'));
     }
 
+    public function memberEventDetail($id)
+    {
+        $title = "Event Detail";
+
+        $getEvent = (new Event())->getEventById($id);
+
+        return view('member.event.list.subviews.info', compact('title', 'getEvent'));
+    }
+
 
 //----------------------------------------------------------------- API ---------------------------------------------------------------------------------------------
 
@@ -150,4 +159,6 @@ class EventController extends Controller
             ]);
         }
     }
+
+
 }

@@ -2,6 +2,10 @@
 
 @section('content')
 
+<!--begin::Modal-->
+@include('member.event.list.modal.register')
+<!--end::Modal-->
+
 <div class="content-body">
 	<!-- row -->
 	<div class="container-fluid">
@@ -52,16 +56,30 @@
 									<tr>
 										<td>{{ $y }}</td>
 										<td>{{ $event->event }}</td>
-										<td>{{ $event->event_date }}</td>
-										<td>{{ $event->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
 										<td>{{ ucfirst($event->type) }}</td>
-										<td></td>
+										@php
+											$id = Auth::user()->id;
+											$r=0;
+											foreach ($event->event_register as $key => $value) {
+												if ($key == 'user_id' && $value == '$id') {
+													$r = 1;
+												}
+											}
+											if($r == 1){
+												echo '<td>OK</td>';
+											}else{
+												echo '<td>Not OK</td>';
+											}
+											
+										@endphp
 										<td>
 											<div class="d-flex align-items-center">
-												<a href="javascript:void(0)" class="mr-4" id="register" data-event="4" data-id="{{ $event->id }}">
+												<a href="javascript:void(0)" data-toggle="modal" data-target="#basicModal" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $event->id }}" data-ename="{{ $event->event }}">
 													<i class="las la-registered scale-2"></i>
 												</a>
-												<a href="javascript:void(0)" class="mr-4">
+												<a href="detail/{{$event->id}}" class="mr-4">
 													<i class="las la-list-alt scale-2"></i>
 												</a>
 											</div>
@@ -97,16 +115,16 @@
 									<tr>
 										<td>{{ $t }}</td>
 										<td>{{ $freeEvent->event }}</td>
-										<td>{{ $freeEvent->event_date }}</td>
-										<td>{{ $freeEvent->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($freeEvent->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($freeEvent->event_time))}}</td>
 										<td>{{ ucfirst($freeEvent->type) }}</td>
 										<td></td>
 										<td>
 											<div class="d-flex align-items-center">
-												<a href="javascript:void(0)" class="mr-4" id="register" data-event="4" data-id="{{ $freeEvent->id }}">
+												<a href="javascript:void(0)" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $freeEvent->id }}">
 													<i class="las la-registered scale-2"></i>
 												</a>
-												<a href="javascript:void(0)" class="mr-4">
+												<a href="detail/{{$freeEvent->id}}" class="mr-4">
 													<i class="las la-list-alt scale-2"></i>
 												</a>
 											</div>
@@ -142,16 +160,16 @@
 									<tr>
 										<td>{{ $p }}</td>
 										<td>{{ $paidEvent->event }}</td>
-										<td>{{ $paidEvent->event_date }}</td>
-										<td>{{ $paidEvent->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($paidEvent->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($paidEvent->event_time))}}</td>
 										<td>{{ ucfirst($paidEvent->type) }}</td>
 										<td></td>
 										<td>
 											<div class="d-flex align-items-center">
-												<a href="javascript:void(0)" class="mr-4" id="register" data-event="4" data-id="{{ $paidEvent->id }}">
+												<a href="javascript:void(0)" class="mr-4" id="register" data-event="{{ Auth::user()->id }}" data-id="{{ $paidEvent->id }}">
 													<i class="las la-registered scale-2"></i>
 												</a>
-												<a href="javascript:void(0)" class="mr-4">
+												<a href="detail/{{$paidEvent->id}}" class="mr-4">
 													<i class="las la-list-alt scale-2"></i>
 												</a>
 											</div>
@@ -215,6 +233,22 @@
 		});
 	})(jQuery);
 </script>
+<script>
+	$(document).ready(function(){
+		$("#register").on('click', function() {
+
+			var id = $(this).data('id');
+			var event = $(this).data('event');
+			var ename = $(this).data('ename');
+
+			$('#register_id').val(id);
+			$('#register_event').val(event);
+			document.getElementById('event_name').innerHTML = ename;
+
+			$('#basicModal').modal('show');
+		});
+	});
+</script>
 
 <script>
 $(document).ready(function(){
@@ -222,7 +256,6 @@ $(document).ready(function(){
     $.ajax({
 		url: "{{ route('member.register.add') }}",
 		data:{
-			"_token": "{{ csrf_token() }}",
 			"id": id,
 			"event": event
 		},

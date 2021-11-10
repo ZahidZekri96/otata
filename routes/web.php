@@ -77,6 +77,7 @@ Route::group(['prefix' => 'member'], function(){
         Route::get('/list', 'App\Http\Controllers\EventController@index_member')->name('member.event.list');
         Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
         Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+        Route::get('/detail/{id}', 'App\Http\Controllers\EventController@memberEventDetail')->name('member.event.detail');
     });
 
     Route::group(['prefix' => 'donation'], function(){
