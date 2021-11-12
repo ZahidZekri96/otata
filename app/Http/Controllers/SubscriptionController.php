@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class SubscriptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('super');
+    }
+    
     public function memberIndex()
     {
         $title = "Subscription";

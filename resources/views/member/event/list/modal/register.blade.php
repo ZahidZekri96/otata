@@ -10,8 +10,9 @@
             <div class="modal-footer">
                 <input type="hidden" name="register_id" value="" id="register_id">
                 <input type="hidden" name="register_event" value="" id="register_event">
+                <input type="hidden" name="register_type" value="" id="register_type">
                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Register</button>
+                <button type="button" class="btn btn-primary" id="btn-register">Register</button>
             </div>
         </div>
     </div>

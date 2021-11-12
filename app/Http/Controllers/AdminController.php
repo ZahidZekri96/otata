@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use App\Models\User;
 use App\Models\UserInfo;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('super');
+    }
+
     public function index()
     {
         $title = "List Admin / Staff";

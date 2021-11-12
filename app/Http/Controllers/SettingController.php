@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Auth;
 
 use App\Models\User;
 use App\Models\UserInfo;
 
 class SettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('super');
+    }
 
     public function addUser()
     {

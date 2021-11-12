@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/demo', function () {
-    return view('demo');
- });
+
 
 Route::get('/home', function () {
     return view('home');
@@ -71,13 +69,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'member'], function(){
-    Route::get('/main', 'App\Http\Controllers\MemberMainController@index')->name('main');
+    Route::get('/main', 'App\Http\Controllers\MemberMainController@index')->name('member.main');
 
     Route::group(['prefix' => 'event'], function(){
         Route::get('/list', 'App\Http\Controllers\EventController@index_member')->name('member.event.list');
         Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
         Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
         Route::get('/detail/{id}', 'App\Http\Controllers\EventController@memberEventDetail')->name('member.event.detail');
+        Route::post('/register/paid', 'App\Http\Controllers\EventController@apiRegisterPaidEvent')->name('member.register.paid');
     });
 
     Route::group(['prefix' => 'donation'], function(){
