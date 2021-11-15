@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Auth;
 
 use App\Models\Donation;
+use App\Models\UsersInfo;
+use App\Models\User;
 
 class DonationController extends Controller
 {
@@ -30,17 +33,20 @@ class DonationController extends Controller
     {
         try{
 
+            $digits = 5;
             $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
 
             $event = Donation::create([
                 'order_id'          => $invoiceno,
                 'cost'              => $request->cost,
                 'payment_type'      => $request->type,
-                'description'       => $request->description,
             ]);
 
-            $digits = 3;
-            $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
+            $cost = $request->cost*100;
+
+            $getUser = User::find($request->userid);
+
+            //dd($cost);
 
             $option = array(
                 'userSecretKey'=>'i2ss8my7-lvas-tchg-n28s-k4azerqyit3s',
@@ -49,13 +55,13 @@ class DonationController extends Controller
                 'billDescription'=>'Otata Donation',
                 'billPriceSetting'=>1,
                 'billPayorInfo'=>1,
-                'billAmount'=>'10000',
-                'billReturnUrl'=>route('register.toyyibpay.paid'),
-                'billCallbackUrl'=>route('register.toyyibpay.cb'),
+                'billAmount'=>$cost,
+                'billReturnUrl'=>route('member.event.list'),
+                'billCallbackUrl'=>route('member.event.list'),
                 'billExternalReferenceNo' => $invoiceno,
-                'billTo'=>$request->name,
-                'billEmail'=>$request->email,
-                'billPhone'=>$request->hpnum,
+                'billTo'=>$getUser->name,
+                'billEmail'=>$getUser->email,
+                'billPhone'=>$getUser->userinfo->hpnum,
                 'billSplitPayment'=>0,
                 'billSplitPaymentArgs'=>'',
                 'billPaymentChannel'=>'0',
@@ -74,7 +80,7 @@ class DonationController extends Controller
             return response()->json([
                 "status"  => true,
                 "message" => "success",
-                "object"  => $event->id
+                "object"  => $url
             ]);
 
         }catch (Exception $exception){

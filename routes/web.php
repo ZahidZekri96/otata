@@ -81,13 +81,12 @@ Route::group(['prefix' => 'member'], function(){
 
     Route::group(['prefix' => 'donation'], function(){
         Route::get('/', 'App\Http\Controllers\DonationController@memberIndex')->name('member.donation');
-        Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
-        Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+        Route::post('/add', 'App\Http\Controllers\DonationController@apiPostStoreDonation')->name('member.donation.add');
     });
 
     Route::group(['prefix' => 'subscription'], function(){
         Route::get('/', 'App\Http\Controllers\SubscriptionController@memberIndex')->name('member.subscription');
-        Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('member.event.add');
+        Route::post('/add', 'App\Http\Controllers\SubscriptionController@apiPostStoreSubscription')->name('member.subscription.add');
         Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
     });
 });

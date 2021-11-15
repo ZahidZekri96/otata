@@ -35,7 +35,7 @@
                                 </table>
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary">Subscribe</button>
+                                <button type="button" class="btn btn-primary" id="btn-subscribe">Subscribe</button>
                             </div>
                         </form>
                     </div>
@@ -48,13 +48,29 @@
 
 @push('script')
 <script>
-$('#sub_quantity').bind('keyup mouseup', function () {
-    var subprice =  $('#subprice').val();
-    var quantity = $(this).val();
-    var total = subprice*quantity;
-    total=total.toFixed(2);
-    $('#total_sub, #total_sub2').html(total);
-    $('#totalprice').val(total);
+$(document).ready(function(){
+
+$("#btn-subscribe").click(function(){
+    $.ajax({
+        url: "{{ route('member.subscription.add') }}",
+        data:{
+            "cost": 100.00,
+        },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            if(data.message != 'success'){
+                var errors = data;
+                $.each(errors, function(index, sm){
+                    toastr.error(sm, {timeOut: 5000});
+                });
+            } else{
+                window.location.href = data.object;
+                toastr.success('@lang("Thank you for your donation")', {timeOut: 5000});
+            }
+        }
+    });
+});
 });
 </script>
 @endpush
