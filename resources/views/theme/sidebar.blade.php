@@ -73,12 +73,12 @@
                     <span class="nav-text">Tadarus Al-Quran</span>
                 </a>
             </li>
-            <li><a class="ai-icon" href="javascript:void()" aria-expanded="false">
+            <li><a class="ai-icon" href="{{ route('member.donation') }}" aria-expanded="false">
                     <i class="flaticon-381-television"></i>
                     <span class="nav-text">Donation</span>
                 </a>
             </li>
-            <li><a class="ai-icon" href="javascript:void()" aria-expanded="false">
+            <li><a class="ai-icon" href="{{ route('member.subscription') }}" aria-expanded="false">
                     <i class="flaticon-381-television"></i>
                     <span class="nav-text">Subscription</span>
                 </a>
@@ -88,8 +88,8 @@
                     <span class="nav-text">Setting</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="">Change Profile</a></li>
-                    <li><a class="">Change Password</a></li>
+                    <li><a class="" href="{{ route('member.setting.profile') }}">Edit Profile</a></li>
+                    <li><a class="" href="{{ route('member.setting.change_password') }}">Change Password</a></li>
                 </ul>
             </li>
         </ul>
