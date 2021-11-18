@@ -85,10 +85,16 @@
 												@endphp
 													<a href="javascript:void(0)" data-toggle="modal" data-target="#basicModal" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $event->id }}" data-ename="{{ $event->event }}" data-type="{{ $event->type }}">
 													<i class="las la-registered scale-2"></i>
+													</a>
+												@php
+												}else if($r==1){
+												@endphp
+												<a href="{{ $event->link }}"  class="mr-4" id="redirect">
+													<i class="las la-external-link-alt scale-2"></i>
+												</a>
 												@php
 												}
 												@endphp
-												</a>
 											</div>
 										</td>
 									</tr>
@@ -152,6 +158,12 @@
 													<a href="javascript:void(0)" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $freeEvent->id }}">
 														<i class="las la-registered scale-2"></i>
 													</a>
+												@php
+												}else if($r==1){
+												@endphp
+												<a href="{{ $freeEvent->link }}"  class="mr-4" id="redirect">
+													<i class="las la-external-link-alt scale-2"></i>
+												</a>
 												@php
 												}
 												@endphp
@@ -219,6 +231,12 @@
 													<a href="javascript:void(0)" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $paidEvent->id }}">
 														<i class="las la-registered scale-2"></i>
 													</a>
+												@php
+												}else if($r==1){
+												@endphp
+												<a href="{{ $paidEvent->link }}"  class="mr-4" id="redirect">
+													<i class="las la-external-link-alt scale-2"></i>
+												</a>
 												@php
 												}
 												@endphp

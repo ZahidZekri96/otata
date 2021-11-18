@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UsersInfo;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -29,7 +32,25 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
+
+    public function redirectTo()
+    {
+        switch(Auth::user()->type){
+            case 'admin':
+                $this->redirectTo = '/main';
+                return $this->redirectTo;
+                break;
+            case 'member':
+                $this->redirectTo = '/member/main';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = '/login';
+                return $this->redirectTo;
+        } 
+        // return $next($request);
+    } 
 
     /**
      * Create a new controller instance.
@@ -64,10 +85,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
+            'type'      => 'member',
+            'status'    => 1,
         ]);
+
+        $userinfo = UsersInfo::create([
+            'user_id'       => $user->id,
+            'gender'        => $data['gender'],
+            'address'       => $data['address'],
+            'postcode'      => $data['postcode'],
+            'city'          => $data['city'],
+            'state'         => $data['state'],
+            'country'       => $data['country'],
+            'hpnum'         => $data['phone']
+        ]);
+
+        return $user;
     }
 }

@@ -10,19 +10,6 @@
                         <form>
                         @csrf
                             <div class="form-group row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4">
-                                    <label for="description" class="col-form-label">{{ __('Photo') }}</label>
-                                    <img id="preview" class="img-thumbnail" style="display:none;width:350px;">
-                                    <div>
-                                        <input type="file" name="photo" id="photo" class="file" accept="image/*">
-                                        <a class="btn btn-default" id="removeFile" style="display:none;">{{ __('Remove')}}</a>
-                                        <input type="hidden" id="current_photo" name="current_photo" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-4"></div>
-                            </div>
-                            <div class="form-group row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
                                     <label for="email" class="col-form-label">{{ __('Event Name') }}<span style="color:darkred">*</span></label>
@@ -44,11 +31,18 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <label for="first_name" class="col-form-label">{{ __('Event Type') }}<span style="color:darkred">*</span></label>
-                                    <input type="text" class="form-control" placeholder="{{ __('Enter first name') }} ..." id="first_name" name="first_name" value="{{ $getEvent->type }}" disabled>
+                                    <input type="text" class="form-control" placeholder="{{ __('Enter first name') }} ..." id="first_name" name="first_name" value="{{ ucfirst($getEvent->type) }}" disabled>
                                 </div>
 								<div class="col-md-5">
                                     <label for="vity" class="col-form-label">{{ __('Price') }}<span style="color:darkred">*</span></label>
-                                    <input type="text" class="form-control" placeholder="{{ __('Price') }}" id="city" name="city" value="RM {{ $getEvent->price }}">
+                                    @php
+                                    if($getEvent->type == 'free'){
+                                        $price = 0.00;
+                                    }else if($getEvent->type == 'paid'){
+                                        $price = $getEvent->price;
+                                    }
+                                    @endphp
+                                    <input type="text" class="form-control" placeholder="{{ __('Price') }}" id="city" name="city" value="RM {{ number_format($price, 2, '.', '') }}">
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>

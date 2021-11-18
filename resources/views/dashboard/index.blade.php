@@ -4,6 +4,7 @@
 
 <div class="content-body">
     <div class="container-fluid">
+        
 		<div class="row" id="summary">
 			<div class="col-xl-4">
 				<div class="card">

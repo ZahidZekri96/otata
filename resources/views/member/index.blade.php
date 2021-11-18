@@ -18,22 +18,26 @@
        <!-- /#page-wrapper -->
    </div>
    <!-- /#wrapper -->
-   <!-- jQuery -->
-    <script src="{{ asset('theme/vendor/global/global.min.js') }}"></script>
-	<script src="{{ asset('theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-	<script src="{{ asset('theme/vendor/chart.js/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('theme/js/custom.min.js') }}"></script>
-	<script src="{{ asset('theme/js/deznav-init.js') }}"></script>
-	<script src="{{ asset('theme/vendor/owl-carousel/owl.carousel.js') }}"></script>
-	
-	<!-- Chart piety plugin files -->
-    <script src="{{ asset('theme/vendor/peity/jquery.peity.min.js') }}"></script>
-	
-	<!-- Apex Chart -->
-	<script src="{{ asset('theme/vendor/apexchart/apexchart.js') }}"></script>
-	
-	<!-- Dashboard 1 -->
-	<script src="{{ asset('theme/js/dashboard/dashboard-1.js') }}"></script>
-    @stack('script')
+
+<footer>
+    
+<!-- jQuery -->
+<script src="{{ asset('theme/vendor/global/global.min.js') }}"></script>
+<script src="{{ asset('theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('theme/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('theme/js/custom.min.js') }}"></script>
+<script src="{{ asset('theme/js/deznav-init.js') }}"></script>
+<script src="{{ asset('theme/vendor/owl-carousel/owl.carousel.js') }}"></script>
+
+<!-- Chart piety plugin files -->
+<script src="{{ asset('theme/vendor/peity/jquery.peity.min.js') }}"></script>
+
+<!-- Apex Chart -->
+<script src="{{ asset('theme/vendor/apexchart/apexchart.js') }}"></script>
+
+<!-- Dashboard 1 -->
+<script src="{{ asset('theme/js/dashboard/dashboard-1.js') }}"></script>
+@stack('script')
+</footer>
 </body>
 </html>

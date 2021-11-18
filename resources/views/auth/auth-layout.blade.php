@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ config('app.name', 'Otata') }}</title>
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
 	<link rel="stylesheet" href="{!! asset('theme/vendor/chartist/css/chartist.min.css') !!}">
     <link href="{!! asset('theme/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') !!}" rel="stylesheet">
