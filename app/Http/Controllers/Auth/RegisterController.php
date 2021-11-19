@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Http;
 use Auth;
 
 class RegisterController extends Controller
@@ -85,25 +86,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'password'  => Hash::make($data['password']),
-            'type'      => 'member',
-            'status'    => 1,
-        ]);
+        // $user = User::create([
+        //     'name'      => $data['name'],
+        //     'email'     => $data['email'],
+        //     'password'  => Hash::make($data['password']),
+        //     'type'      => 'member',
+        //     'status'    => 1,
+        // ]);
 
-        $userinfo = UsersInfo::create([
-            'user_id'       => $user->id,
-            'gender'        => $data['gender'],
-            'address'       => $data['address'],
-            'postcode'      => $data['postcode'],
-            'city'          => $data['city'],
-            'state'         => $data['state'],
-            'country'       => $data['country'],
-            'hpnum'         => $data['phone']
-        ]);
+        // $userinfo = UsersInfo::create([
+        //     'user_id'       => $user->id,
+        //     'gender'        => $data['gender'],
+        //     'address'       => $data['address'],
+        //     'postcode'      => $data['postcode'],
+        //     'city'          => $data['city'],
+        //     'state'         => $data['state'],
+        //     'country'       => $data['country'],
+        //     'hpnum'         => $data['phone']
+        // ]);
 
-        return $user;
+        $digits = 5;
+        $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
+
+        $total_sub='100.00';
+
+        return $this->redirectTo= '/senangpay';
     }
 }

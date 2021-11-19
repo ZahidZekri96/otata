@@ -53,6 +53,11 @@ class User extends Authenticatable
         return $this->hasOne(UsersInfo::class,'user_id','id');
     }
 
+    public function usersubscribe(){
+
+        return $this->hasOne(UserSubscribe::class,'user_id','id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | End Relationship

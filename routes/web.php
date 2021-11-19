@@ -23,6 +23,11 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::group(['prefix' => 'senangpay'], function(){
+    Route::get('/', 'App\Http\Controllers\SenangpayController@index')->name('senangpay');
+    Route::get('/return', 'App\Http\Controllers\SenangpayController@return')->name('senangpay.return');
+});
+
 Route::group(['prefix' => 'main'], function(){
     Route::get('/', 'App\Http\Controllers\MainController@index')->name('main');
 });
