@@ -79,12 +79,12 @@
                                 @php
                                     $y=1
                                 @endphp
-                                @foreach ($getFreeEvent as $free)
+                                @foreach ($getUpcomingEvent as $upcoming)
                                 <tr>
                                     <td>{{ $y }}</td>
-                                    <td>{{ $free->event  }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($free->event_date)) }} {{date("h:i A", strtotime($free->event_time))}}</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Join</button></td>
+                                    <td>{{ $upcoming->event  }}</td>
+                                    <td>{{ date("d-m-Y", strtotime($upcoming->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
+                                    <td><button type="button" class="btn btn-primary btn-sm">{{ ('Detail') }}</button></td>
                                 </tr>
                                 @php 
                                     $y++
@@ -122,7 +122,7 @@
                                     <td>{{ $y }}</td>
                                     <td>{{ $free->event }}</td>
                                     <td>{{ date("d-m-Y", strtotime($free->event_date)) }} {{date("h:i A", strtotime($free->event_time))}}</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Register</button></td>
+                                    <td><button type="button" class="btn btn-primary btn-sm">{{ ('Detail') }}</button></td>
                                 </tr>
                                 @php 
                                     $y++
@@ -158,7 +158,7 @@
                                     <td>{{ $y }}</td>
                                     <td>{{ $paid->event }}</td>
                                     <td>{{ $paid->event_date }} {{date("h:i A", strtotime($paid->event_time))}}</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Register</button></td>
+                                    <td><button type="button" class="btn btn-primary btn-sm">{{ ('Detail') }}</button></td>
                                 </tr>
                                 @php 
                                     $y++

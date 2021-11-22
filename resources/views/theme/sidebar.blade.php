@@ -3,7 +3,7 @@
         @if(Auth::user()->type == "admin")
         <a href="javascript:void(0)" class="add-menu-sidebar" data-toggle="modal" data-target="#addOrderModalside" >+ New Event</a>
         <ul class="metismenu" id="menu">
-            <li><a class="ai-icon" href="javascript:void()" >
+            <li><a class="ai-icon" href="{{ route ('main') }}" >
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
@@ -13,7 +13,7 @@
                     <span class="nav-text">Event</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="" >List Event</a>
+                    <li><a href="{{ route ('event.list') }}" >List Event</a>
                     </li>
                     <li><a href="./post-details.html">Tadarus Al-Quran</a></li>
                 </ul>
@@ -32,8 +32,8 @@
                     <span class="nav-text">User</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="">Customer</a></li>
-                    <li><a class="">Admin / Staff</a></li>
+                    <li><a class="" href="{{ route ('customer.list') }}">Customer</a></li>
+                    <li><a class="" href="{{ route ('admin.list') }}">Admin / Staff</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -41,8 +41,8 @@
                     <span class="nav-text">Report</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="">Customer</a></li>
-                    <li><a class="">Admin / Staff</a></li>
+                    <li><a class="" href="{{ route ('report.payment') }}">Payment</a></li>
+                    <li><a class="" href="{{ route ('report.event') }}">Event</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

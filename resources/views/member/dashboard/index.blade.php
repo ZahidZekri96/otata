@@ -45,43 +45,6 @@
 			</div>
 		</div>
 
-        <div class="row" id="donation">
-            <div class="col-xl-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title">Upcoming Event</h4>
-					</div>
-                    <div class="card-body">
-                        <table id="example2" class="table card-table display dataTablesCard">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Event Name</th>
-                                    <th>Date & Time</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $y=1
-                                @endphp
-                                @foreach ($getFreeEvent as $free)
-                                <tr>
-                                    <td>{{ $y }}</td>
-                                    <td>{{ $free->event  }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($free->event_date)) }} {{date("h:i A", strtotime($free->event_time))}}</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Join</button></td>
-                                </tr>
-                                @php 
-                                    $y++
-                                @endphp
-                                @endforeach
-                            </tbody>
-                        </table>
-					</div>
-				</div>
-			</div>
-        </div>
         
         <div class="row" id="donation">
             <div class="col-xl-12">
@@ -103,11 +66,11 @@
                                 @php
                                     $y=1
                                 @endphp
-                                @foreach ($getFreeEvent as $free)
+                                @foreach ($getUpcomingEvent as $upcoming)
                                 <tr>
                                     <td>{{ $y }}</td>
-                                    <td>{{ $free->event  }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($free->event_date)) }} {{date("h:i A", strtotime($free->event_time))}}</td>
+                                    <td>{{ $upcoming->event  }}</td>
+                                    <td>{{ date("d-m-Y", strtotime($upcoming->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
                                     <td><button type="button" class="btn btn-primary btn-sm">Join</button></td>
                                 </tr>
                                 @php 

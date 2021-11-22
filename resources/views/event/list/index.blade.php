@@ -40,6 +40,7 @@
 										<th>Event Date</th>
 										<th>Event Time </th>
 										<th>Type</th>
+										<th>{{ ('Action') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -50,9 +51,10 @@
 									<tr>
 										<td>{{ $y }}</td>
 										<td>{{ $event->event }}</td>
-										<td>{{ $event->event_date }}</td>
-										<td>{{ $event->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
 										<td>{{ ucfirst($event->type) }}</td>
+										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Edit') }}</button></td>
 									</tr>
 									@php 
 										$y++
@@ -72,6 +74,7 @@
 										<th>Event Date</th>
 										<th>Event Time </th>
 										<th>Type</th>
+										<th>{{ ('Action') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -82,9 +85,10 @@
 									<tr>
 										<td>{{ $t }}</td>
 										<td>{{ $freeEvent->event }}</td>
-										<td>{{ $freeEvent->event_date }}</td>
-										<td>{{ $freeEvent->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($freeEvent->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($freeEvent->event_time))}}</td>
 										<td>{{ ucfirst($freeEvent->type) }}</td>
+										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">Detail</button></td>
 									</tr>
 									@php 
 										$t++
@@ -104,6 +108,7 @@
 										<th>Event Date</th>
 										<th>Event Time </th>
 										<th>Type</th>
+										<th>{{ ('Action') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -114,9 +119,10 @@
 									<tr>
 										<td>{{ $p }}</td>
 										<td>{{ $paidEvent->event }}</td>
-										<td>{{ $paidEvent->event_date }}</td>
-										<td>{{ $paidEvent->event_time }}</td>
+										<td>{{ date("d-m-Y", strtotime($paidEvent->event_date)) }}</td>
+										<td>{{date("h:i A", strtotime($paidEvent->event_time))}}</td>
 										<td>{{ ucfirst($paidEvent->type) }}</td>
+										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">Detail</button></td>
 									</tr>
 									@php 
 										$p++

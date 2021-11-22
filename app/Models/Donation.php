@@ -12,7 +12,7 @@ class Donation extends Model
     protected $table = 'donation';
 
     protected $fillable = [
-        'order_id', 'cost', 'payment_type'
+        'order_id', 'cost', 'payment_type', 'status'
     ];
 
     protected $dates = [

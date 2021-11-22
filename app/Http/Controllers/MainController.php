@@ -20,10 +20,12 @@ class MainController extends Controller
     {
         $title = "Dashboard";
 
-        $getFreeEvent = Event::where("type" , "free")->take(5)->get();
-        
-        $getPaidEvent = Event::where("type" , "paid")->take(5)->get();
+        $getUpcomingEvent = Event::where("event_date" ,'>=', date("Y-m-d"))->orderBy('event_date', 'asc')->take(5)->get();
 
-        return view('dashboard.index', compact('title', 'getFreeEvent', 'getPaidEvent'));
+        $getFreeEvent = Event::where("type" , "free")->orderBy('id', 'desc')->take(5)->get();
+        
+        $getPaidEvent = Event::where("type" , "paid")->orderBy('id', 'desc')->take(5)->get();
+
+        return view('dashboard.index', compact('title', 'getFreeEvent', 'getPaidEvent', 'getUpcomingEvent'));
     }
 }

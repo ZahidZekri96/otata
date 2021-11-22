@@ -26,6 +26,9 @@ Route::get('/home', function () {
 Route::group(['prefix' => 'senangpay'], function(){
     Route::get('/', 'App\Http\Controllers\SenangpayController@index')->name('senangpay');
     Route::get('/return', 'App\Http\Controllers\SenangpayController@return')->name('senangpay.return');
+    Route::get('/event/paid/{id}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayRegisterEvent')->name('senangpay.event.paid');
+    Route::get('/donation/paid/{donation}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayDonation')->name('senangpay.donation.paid');
+    Route::post('/update', 'App\Http\Controllers\SenangpayController@updateSenangpay')->name('senangpay.update.paid');
 });
 
 Route::group(['prefix' => 'main'], function(){
@@ -36,6 +39,8 @@ Route::group(['prefix' => 'event'], function(){
     Route::get('/list', 'App\Http\Controllers\EventController@index')->name('event.list');
     Route::get('/data', 'App\Http\Controllers\EventController@apiGetIndexDt')->name('event.dt');
     Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('event.add');
+    Route::get('/detail/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.detail');
+    Route::post('/update/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.update');
 });
 
 Route::group(['prefix' => 'customer'], function(){
@@ -65,7 +70,7 @@ Route::group(['prefix' => 'setting'], function(){
 });
 
 Route::group(['prefix' => 'report'], function(){
-    Route::get('/summary', 'App\Http\Controllers\ReportController@summary')->name('report.summary');
+    Route::get('/payment', 'App\Http\Controllers\ReportController@payment')->name('report.payment');
     Route::get('/event', 'App\Http\Controllers\ReportController@event')->name('report.event');
 });
 

@@ -35,6 +35,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="text-black font-w500">Event Price</label>
+                        <input type="time" class="form-control" name="price" id="price">
+                    </div>
+                    <div class="form-group">
                         <label class="text-black font-w500">Description</label>
                         <textarea class="form-control" rows="4" id="description" name="description"></textarea>
                     </div>

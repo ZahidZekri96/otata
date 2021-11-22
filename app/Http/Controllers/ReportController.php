@@ -15,11 +15,11 @@ class ReportController extends Controller
         $this->middleware('super');
     }
 
-    public function summary()
+    public function payment()
     {
         $title = "Report Summary";
 
-        return view('report.summary.index', compact('title'));
+        return view('report.payment.index', compact('title'));
     }
 
     public function event()

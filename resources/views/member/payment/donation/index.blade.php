@@ -71,8 +71,13 @@ $(document).ready(function(){
                         toastr.error(sm, {timeOut: 5000});
                     });
                 } else{
-                    window.location.href = data.object;
-                    toastr.success('@lang("Thank you for your donation")', {timeOut: 5000});
+                    var url         = "{{ route('senangpay.donation.paid', [':donation',':order_id']) }}";
+					let order_id = data.object.order_id;
+                    let donation = data.object.donation;
+					
+					url             = url.replace(':donation',donation);
+					url				= url.replace(':order_id',order_id);
+					window.location.href = url;
                 }
             }
         });

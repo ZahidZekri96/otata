@@ -12,7 +12,7 @@ class EventRegister extends Model
     protected $table = 'event_register';
 
     protected $fillable = [
-        'event_id', 'user_id'
+        'event_id', 'user_id', 'order_id', 'status'
     ];
 
     protected $dates = [
@@ -28,6 +28,12 @@ class EventRegister extends Model
     | Relationship
     |--------------------------------------------------------------------------
     */
+
+    // public function senangpay()
+    // {
+    //     return $this->hasOne(OrderPurchPaymentSenangpay::class, 'order_id', 'order_id');
+    // }
+
     /*
     |--------------------------------------------------------------------------
     | End Relationship

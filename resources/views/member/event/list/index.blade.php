@@ -83,7 +83,7 @@
 												@php
 												if($r == 0){
 												@endphp
-													<a href="javascript:void(0)" data-toggle="modal" data-target="#basicModal" class="mr-4" id="register" data-id="{{ Auth::user()->id }}" data-event="{{ $event->id }}" data-ename="{{ $event->event }}" data-type="{{ $event->type }}">
+													<a href="" data-toggle="modal" data-target="#basicModal" class="mr-4 register" data-id="{{ Auth::user()->id }}" data-event="{{ $event->id }}" data-ename="{{ $event->event }}" data-type="{{ $event->type }}">
 													<i class="las la-registered scale-2"></i>
 													</a>
 												@php
@@ -288,14 +288,6 @@
 			lengthChange:false 
 			
 		});
-		var table = $('#example5').DataTable({
-			searching: false,
-			paging:true,
-			select: false,
-			//info: false,         
-			lengthChange:false 
-			
-		});
 		$('#example tbody').on('click', 'tr', function () {
 			var data = table.row( this ).data();
 			
@@ -304,8 +296,7 @@
 </script>
 <script>
 	$(document).ready(function(){
-		$("#register").on('click', function() {
-
+		$(".register").on('click', function() {
 			var id = $(this).data('id');
 			var event = $(this).data('event');
 			var ename = $(this).data('ename');
@@ -366,7 +357,13 @@ $(document).ready(function(){
 						toastr.error(sm, {timeOut: 5000});
 					});
 				} else{
-					window.location.href = data.object;
+					var url         = "{{ route('senangpay.event.paid', [':id',':order_id']) }}";
+					let order_id = data.object.order_id;
+					
+					url             = url.replace(':id',event);
+					url				= url.replace(':order_id',order_id);
+					window.location.href = url;
+					
 				}
 			}
 		});
