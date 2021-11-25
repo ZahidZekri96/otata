@@ -3,7 +3,7 @@
 <title>senangPay Sample Code</title>
 </head>
 <body onload="document.order.submit()">
-    <form name="order" method="post" action="https://sandbox.senangpay.my/payment/404154564160746">
+    <form name="order" method="post" action="https://app.senangpay.my/payment/706163516489647">
         <input type="hidden" name="detail" value="{{ $detail }}">
         <input type="hidden" name="amount" value="{{ $amount }}">
         <input type="hidden" name="order_id" value="{{ $order_id }}">

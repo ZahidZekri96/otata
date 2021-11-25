@@ -65,8 +65,11 @@ $("#btn-subscribe").click(function(){
                     toastr.error(sm, {timeOut: 5000});
                 });
             } else{
-                window.location.href = data.object;
-                toastr.success('@lang("Thank you for your donation")', {timeOut: 5000});
+                var url         = "{{ route('senangpay.subscription.paid', ':order_id') }}";
+                let order_id = data.object.order_id;
+                
+                url				= url.replace(':order_id',order_id);
+                window.location.href = url;
             }
         }
     });

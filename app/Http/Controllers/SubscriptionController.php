@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Auth;
 
+use App\Models\OrderPurchPaymentSenangpay;
+use App\Models\User;
+use App\Models\UserInfo;
+use App\Models\UserSubscribe;
+
 class SubscriptionController extends Controller
 {
     public function __construct()
@@ -27,36 +32,37 @@ class SubscriptionController extends Controller
     {
         try{
 
+            $getUser  = User::find(Auth::user()->id);
+
+            $getUserSubscribe = UserSubscribe::where('user_id',Auth::user()->id)->first();
+
             $digits = 5;
-            $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
+            $order_id = rand(pow(10, $digits-1), pow(10, $digits)-1);
 
-            $total_sub='100.00';
+            if($getUserSubscribe != null){
+                $getUserSubscribe -> order_id = $order_id;
+                $getUserSubscribe -> status = 'pending';
+                $getUserSubscribe->save();
+            }else{
+                $userSubscribe = UserSubscribe::create([
+                    'status'            => 'pending',
+                    'order_id'          => $order_id,
+                    'user_id'           => Auth::user()->id
+                ]);
+            }
 
-            $hash_str = "236-823Donation_Otata".$total_sub."".$invoiceno;
+            $senangPay = OrderPurchPaymentSenangpay::create([
+                'state'         => 'pending',
+                'type'          => "subscription",
+                'order_id'      => $order_id
+            ]);
 
-            $hash=hash_hmac('sha256', $hash_str, '236-823');
-
-            $option = array(
-                'recurring_id'=>'',
-                'hash'=>$hash,
-                'order_id' => $invoiceno,
-                'name'=>'Zahid Bin Zekri',
-                'email'=>'zahidzekri@gmail.com',
-                'phone'=>'01123218497',
-            );
-
-            $url = 'https://api.sandbox.senangpay.my/recurring/payment/404154564160746';
-            $response = Http::asForm()->post($url, $option);
-            $result = json_decode($response);
-            //$billCode = $response[0]['BillCode'];
-            //$url='https://dev.toyyibpay.com/'.$billCode;
-            dd($result);
-
+            $object['order_id'] = $order_id;
 
             return response()->json([
                 "status"  => true,
                 "message" => "success",
-                "object"  => $event->id
+                "object"  => $object
             ]);
 
         }catch (Exception $exception){

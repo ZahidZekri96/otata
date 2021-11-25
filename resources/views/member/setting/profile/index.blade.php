@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form>
                         @csrf
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <label for="description" class="col-form-label">{{ __('Photo') }}</label>
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4"></div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
