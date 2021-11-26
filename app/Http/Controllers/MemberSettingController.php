@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Auth;
 
 use App\Models\User;
-use App\Models\UserInfo;
+use App\Models\UsersInfo;
 
 class MemberSettingController extends Controller
 {
@@ -106,6 +106,41 @@ class MemberSettingController extends Controller
                 "status"  => true,
                 "message" => "success",
                 "object"  => "password"
+            ]);
+        } catch (Exception $exception){
+            return response()->json([
+                "status"  => false,
+                "message" => "error"
+            ]);
+        }
+    }
+
+    
+
+    public function putApiUpdateProfile(Request $request, $id)
+    {
+    	try{
+
+            $user = User::findOrFail($id);
+            $user->name          = $request->full_name;
+            $user->email         = $request->email;
+            $user->save();
+
+            $userinfo = UsersInfo::where('user_id', $id)->first();
+            $userinfo->address      = $request->address;
+            $userinfo->hpnum        = $request->hpnum;
+            $userinfo->postcode     = $request->postcode;
+            $userinfo->city         = $request->city;
+            $userinfo->state        = $request->state;
+            $userinfo->country      = $request->country;
+            $userinfo->gender       = $request->gender;
+            $userinfo->save();
+            
+
+            return response()->json([
+                "status"  => true,
+                "message" => "success",
+                "object"  => $user->id
             ]);
         } catch (Exception $exception){
             return response()->json([

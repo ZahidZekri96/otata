@@ -104,6 +104,7 @@ Route::group(['prefix' => 'member'], function(){
     Route::group(['prefix' => 'setting'], function(){
         Route::get('/profile', 'App\Http\Controllers\MemberSettingController@editProfile')->name('member.setting.profile');
         Route::get('/change_password', 'App\Http\Controllers\MemberSettingController@changePassword')->name('member.setting.change_password');
-        Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
+        Route::put('/profile/update/{id}', 'App\Http\Controllers\MemberSettingController@putApiUpdateProfile')->name('member.setting.profile.update');
+        Route::put('/password/update/{id}', 'App\Http\Controllers\MemberSettingController@putApiUpdatePassword')->name('member.setting.password.update');
     });
 });

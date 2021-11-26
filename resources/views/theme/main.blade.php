@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="{!! asset('theme/vendor/chartist/css/chartist.min.css') !!}">
     <link href="{!! asset('theme/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') !!}" rel="stylesheet">
 	<link href="{!! asset('theme/vendor/owl-carousel/owl.carousel.css') !!}" rel="stylesheet">
+    <link rel="stylesheet" href="{!! asset('theme/vendor/toastr/css/toastr.min.css') !!}">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet">
     <!-- CSRF Token -->
@@ -35,6 +36,10 @@
     
     <!-- Chart piety plugin files -->
     <script src="{{ asset('theme/vendor/peity/jquery.peity.min.js') }}"></script>
+
+    <!-- Toastr -->
+    <script src="{{ asset('theme/vendor/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('theme/js/plugins-init/toastr-init.js') }}"></script>
     
     @stack('script')
     </footer>

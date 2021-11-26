@@ -59,3 +59,38 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+
+
+    $(document).ready(function () {
+        // update agent
+        $('#update_password').on('click', async function(){
+            var form1   = $('.btn-success').closest('form');
+            var formData= await getAllInput(form1);
+            var data    = processSerialize(formData);
+            var id      = $('#id').val();
+            var url     = "{{ route('member.setting.password.update', ':id') }}";
+            url         = url.replace(':id',id);
+
+            $.ajax({
+                url: url,
+                data:data,
+                type: "PUT",
+                dataType: "json",
+                success: function(data) {
+                    if(data.message != 'success'){
+                        var errors = data;
+                        $.each(errors, function(index, sm){
+                            toastr.error(sm, {timeOut: 5000});
+                        });
+                    } else{
+                        toastr.success('@lang("Profile has been updated")', {timeOut: 5000});
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script src="{{ asset('js/custm.js') }}"></script>
+@endpush
