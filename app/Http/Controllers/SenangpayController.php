@@ -8,7 +8,7 @@ use App\Models\OrderPurchPaymentSenangpay;
 use App\Models\Donation;
 use App\Models\EventRegister;
 use App\Models\User;
-use App\Models\UserInfo;
+use App\Models\UsersInfo;
 use App\Models\Event;
 use Auth;
 
@@ -63,6 +63,33 @@ class SenangpayController extends Controller
         $detail = str_replace(' ', '_', $detail);
 
         $order_id = $order_id;
+        
+        $name = $getUser->name;
+
+        $email = $getUser->email;
+
+        $phone = $getUser->userinfo->hpnum;
+
+        $hash_str = "32145-562".$detail."".$amount."".$order_id;
+        $hash=hash_hmac('sha256', $hash_str, '32145-562');
+        
+        return view('senangpay.payment', compact('detail','amount', 'order_id', 'name', 'email','phone', 'hash'));
+    }
+
+    public function senangpayRegistration()
+    {
+
+        $getUser  = User::where('id', Auth::user()->id)->first();
+
+        $getUserInfo = UsersInfo::where('user_id', $getUser->id)->first();
+
+        $detail = "Membership Registration";
+
+        $amount ='20.00';
+        
+        $detail = str_replace(' ', '_', $detail);
+
+        $order_id = $getUserInfo->order_id;
         
         $name = $getUser->name;
 
@@ -173,6 +200,13 @@ class SenangpayController extends Controller
                 $getEvent = Donation::where('order_id',$request->order_id)->first();
                 $getEvent->status = 'success';
                 $getEvent->save();
+
+            }else if($getSenangpay->type == "register"){
+
+                $getUserInfo = UsersInfo::where('order_id',$request->order_id)->first();
+                $getUser = User::where('id',$getUserInfo->user_id)->first();
+                $getUser->status = '1';
+                $getUser->save();
 
             }
 

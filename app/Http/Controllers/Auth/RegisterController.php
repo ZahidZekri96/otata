@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Http;
 use Auth;
 
+use App\Models\OrderPurchPaymentSenangpay;
+
 class RegisterController extends Controller
 {
     /*
@@ -43,7 +45,7 @@ class RegisterController extends Controller
                 return $this->redirectTo;
                 break;
             case 'member':
-                $this->redirectTo = '/member/main';
+                $this->redirectTo = 'senangpay/registration/paid';
                 return $this->redirectTo;
                 break;
             default:
@@ -86,30 +88,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $user = User::create([
-        //     'name'      => $data['name'],
-        //     'email'     => $data['email'],
-        //     'password'  => Hash::make($data['password']),
-        //     'type'      => 'member',
-        //     'status'    => 1,
-        // ]);
-
-        // $userinfo = UsersInfo::create([
-        //     'user_id'       => $user->id,
-        //     'gender'        => $data['gender'],
-        //     'address'       => $data['address'],
-        //     'postcode'      => $data['postcode'],
-        //     'city'          => $data['city'],
-        //     'state'         => $data['state'],
-        //     'country'       => $data['country'],
-        //     'hpnum'         => $data['phone']
-        // ]);
 
         $digits = 5;
-        $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
+        $order_id = rand(pow(10, $digits-1), pow(10, $digits)-1);
 
-        $total_sub='100.00';
+        $user = User::create([
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
+            'type'      => 'member',
+            'status'    => 0,
+        ]);
 
-        return $this->redirectTo= '/senangpay';
+        $userinfo = UsersInfo::create([
+            'user_id'       => $user->id,
+            'gender'        => $data['gender'],
+            'address'       => $data['address'],
+            'postcode'      => $data['postcode'],
+            'city'          => $data['city'],
+            'state'         => $data['state'],
+            'country'       => $data['country'],
+            'hpnum'         => $data['phone'],
+            'order_id'      => $order_id
+        ]);
+
+        $senangPay = OrderPurchPaymentSenangpay::create([
+            'state'         => 'pending',
+            'type'          => "register",
+            'order_id'      => $order_id
+        ]);
+
+        return $user;
     }
 }

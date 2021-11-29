@@ -127,9 +127,9 @@
                             </div>
                         </div>
 
-                        <hr>
+                        <!-- <hr> -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-xl-12 text-center" style="margin:20px 0">
                                 <h3>Choose Your Membership Plan</h3>
                             </div>
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div class="form-group row mb-0 mx-auto" style="width: 50%; margin:30px 0">
                             <div class="col-md-6 offset-md-4">

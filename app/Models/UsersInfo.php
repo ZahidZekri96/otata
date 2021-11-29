@@ -12,7 +12,7 @@ class UsersInfo extends Model
     protected $table = 'users_info';
 
     protected $fillable = [
-        'user_id', 'address', 'postcode', 'city', 'state', 'country', 'gender', 'hpnum'
+        'user_id', 'address', 'postcode', 'city', 'state', 'country', 'gender', 'hpnum', 'order_id'
     ];
 
     protected $dates = [
@@ -33,7 +33,6 @@ class UsersInfo extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
     
-
     /*
     |--------------------------------------------------------------------------
     | End Relationship
