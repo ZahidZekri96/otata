@@ -11,8 +11,9 @@ use App\Models\Event;
 use App\Models\EventRegister;
 use App\Models\UsersInfo;
 use App\Models\User;
+use App\Models\Tadarus;
 
-class EventController extends Controller
+class TadarusController extends Controller
 {
     public function __construct()
     {
@@ -21,46 +22,38 @@ class EventController extends Controller
 
     public function index()
     {
-        $title = "List Event";
+        $title = "Tadarus Al-Quran";
 
-        $getEvent = (new Event())->getEventList("*", "DESC", "active");
-        
-        $getFreeEvent = (new Event())->getFreeEventList("*", "DESC", "active");
-        
-        $getPaidEvent = (new Event())->getPaidEventList("*", "DESC", "active");
+        $getEvent = (new Tadarus())->getEventList("*", "DESC", "active");
 
-        return view('event.list.index', compact('title', 'getEvent' , 'getFreeEvent' , 'getPaidEvent'));
+        return view('event.tadarus.index', compact('title', 'getEvent'));
     }
 
     public function index_member()
     {
-        $title = "List Event";
+        $title = "Tadarus Al-Quran";
 
-        $getEvent = (new Event())->getEventList("*", "DESC", "active");
-        
-        $getFreeEvent = (new Event())->getFreeEventList("*", "DESC", "active");
-        
-        $getPaidEvent = (new Event())->getPaidEventList("*", "DESC", "active");
+        $getEvent = (new Tadarus())->getEventList("*", "DESC", "active");
 
-        return view('member.event.list.index', compact('title', 'getEvent' , 'getFreeEvent' , 'getPaidEvent'));
+        return view('member.tadarus.index', compact('title', 'getEvent'));
     }
 
-    public function eventDetail($id)
+    public function tadarusDetail($id)
     {
         $title = "Event Detail";
 
-        $getEvent = (new Event())->getEventById($id);
+        $getEvent = (new Tadarus())->getEventById($id);
 
-        return view('event.list.subviews.info', compact('title', 'getEvent'));
+        return view('event.tadarus.subviews.info', compact('title', 'getEvent'));
     }
 
-    public function memberEventDetail($id)
+    public function memberTadarusDetail($id)
     {
         $title = "Event Detail";
 
-        $getEvent = (new Event())->getEventById($id);
+        $getEvent = (new Tadarus())->getEventById($id);
 
-        return view('member.event.list.subviews.info', compact('title', 'getEvent'));
+        return view('member.tadarus.subviews.info', compact('title', 'getEvent'));
     }
 
 
@@ -70,9 +63,9 @@ class EventController extends Controller
     public function apiGetIndexDt()
     {
         try{
-            $eventList = (new Event())->getEventList();
+            $eventList = (new Tadarus())->getEventList();
 
-            $object['event'] = $eventList;
+            $object['tadarus'] = $eventList;
 
             return response()->json([
                 "status"  => true,
@@ -88,16 +81,13 @@ class EventController extends Controller
     }
 
     //api save event
-    public function apiPostStoreEvent(Request $request)
+    public function apiPostStoreTadarus(Request $request)
     {
         try{
 
-            $event = Event::create([
+            $event = Tadarus::create([
                 'event'         => $request->name,
                 'link'          => $request->link,
-                'type'          => $request->type,
-                'price'         => $request->price,
-                'event_date'    => $request->date,
                 'event_time'    => $request->time,
                 'description'   => $request->description,
             ]);
@@ -118,14 +108,16 @@ class EventController extends Controller
     }
 
     //api update event
-    public function apiPutUpdateEvent(Request $request)
+    public function apiPutUpdateTadarus(Request $request)
     {
         try{
-            $event = Event::findOrFail($request->event_id);
-            $user->name          = $request->name;
-            $user->email         = $request->email;
-            $user->type          = $request->type;
-            $user->save();
+            $tadarus = Tadarus::findOrFail($request->event_id);
+            $tadarus->event        = $request->event;
+            $tadarus->link         = $request->link;
+            $tadarus->event_time   = $request->event_time;
+            $tadarus->save();
+
+            $object['tadarus'] = $tadarus->id;
 
             return response()->json([
                 "status"  => true,

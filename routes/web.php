@@ -45,6 +45,14 @@ Route::group(['prefix' => 'event'], function(){
     Route::post('/update/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.update');
 });
 
+Route::group(['prefix' => 'tadarus'], function(){
+    Route::get('/', 'App\Http\Controllers\TadarusController@index')->name('tadarus.index');
+    Route::get('/data', 'App\Http\Controllers\TadarusController@apiGetIndexDt')->name('tadarus.dt');
+    Route::post('/add', 'App\Http\Controllers\TadarusController@apiPostStoreTadarus')->name('tadarus.add');
+    Route::get('/detail/{id}', 'App\Http\Controllers\TadarusController@tadarusDetail')->name('tadarus.edit');
+    Route::post('/update', 'App\Http\Controllers\TadarusController@apiPutUpdateTadarus')->name('tadarus.update');
+});
+
 Route::group(['prefix' => 'customer'], function(){
     Route::get('/list', 'App\Http\Controllers\CustomerController@index')->name('customer.list');
     Route::get('/add', 'App\Http\Controllers\CustomerController@add')->name('customer.add');

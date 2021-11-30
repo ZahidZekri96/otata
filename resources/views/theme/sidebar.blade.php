@@ -15,7 +15,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route ('event.list') }}" >List Event</a>
                     </li>
-                    <li><a href="./post-details.html">Tadarus Al-Quran</a></li>
+                    <li><a href="{{ route('tadarus.index') }}">Tadarus Al-Quran</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
