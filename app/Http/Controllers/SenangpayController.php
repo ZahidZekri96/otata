@@ -9,6 +9,7 @@ use App\Models\Donation;
 use App\Models\EventRegister;
 use App\Models\User;
 use App\Models\UsersInfo;
+use App\Models\UserSubscribe;
 use App\Models\Event;
 use Auth;
 
@@ -176,6 +177,7 @@ class SenangpayController extends Controller
     public function updateRecurringSenangpay(Request $request){
         try{
 
+            
             $getSenangpay = OrderPurchPaymentSenangpay::where('order_id',$request->order_id)->first();
 
             $getSenangpay->transaction_id   = $request->transaction_id;
@@ -187,28 +189,15 @@ class SenangpayController extends Controller
             }
             $getSenangpay->save();
 
-            //dd($request->order_id);
+            $valid_start = date("Y-m-d H:i:s");
+            $valid_start = strtotime($valid_start);
+            $valid_end = date('Y-m-d H:i:s', strtotime('+1 month', $valid_start));
 
-            if($getSenangpay->type == "event"){
-
-                $getEvent = EventRegister::where('order_id',$request->order_id)->first();
-                $getEvent->status = 'success';
-                $getEvent->save();
-
-            }else if($getSenangpay->type == "donation"){
-
-                $getEvent = Donation::where('order_id',$request->order_id)->first();
-                $getEvent->status = 'success';
-                $getEvent->save();
-
-            }else if($getSenangpay->type == "register"){
-
-                $getUserInfo = UsersInfo::where('order_id',$request->order_id)->first();
-                $getUser = User::where('id',$getUserInfo->user_id)->first();
-                $getUser->status = '1';
-                $getUser->save();
-
-            }
+            $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
+            $getUserSubscribe->valid_start   = $valid_start;
+            $getUserSubscribe->valid_end     = $valid_end;
+            $getUserSubscribe->status        = 'active';
+            $getUserSubscribe->save();
 
             $object['senangpay'] = $request->status;
 

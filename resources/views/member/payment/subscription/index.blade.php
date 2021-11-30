@@ -10,32 +10,37 @@
                         <form>
                             <div class="purchaseList">
                                 <table class="table table-bordered" width="100%">
-                                    <thead class="tble-header">
-                                        <tr>
-                                            <th class="50%">Product</th>
-                                            <th width="17%" style="text-align: center">Price (RM)</th>
-                                            <th width="10%" style="text-align: center">Month</th>
-                                            <th width="23%" style="text-align: right">Sub Total (RM)</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Otata Subscription</td>
-                                            <td style="text-align: center" id="sub_price">10.00</td>
-                                            <td style="text-align: center"><input type="number" id="sub_quantity" name="sub_quantity" min="1" max="30" value="1" style="text-align: center"></td>
-                                            <td style="text-align: right" id="total_sub">10.00</td>
+                                            <td class="font-weight-bold">Membership Subscription:</td>
+                                            <td style="text-align: center" id="sub_price">RM 150.00/month</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" style="text-align: right"><b>OVERALL TOTAL (RM)</b></td>
-                                            <td style="text-align: right"><b id="total_sub2">10.00</b></td>
+                                            <td><b>Subscription Start:</b></td>
+                                            <td style="text-align: center">{{ $subscription != null ? date("d/m/Y h:i A", strtotime($subscription->valid_start)) : "-" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Subscription End:</b></td>
+                                            <td style="text-align: center">{{ $subscription != null ? date("d/m/Y h:i A", strtotime($subscription->valid_end)) : "-" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Status:</b></td>
+                                            <td style="text-align: center">{{ $subscription != null ? ucfirst($subscription->status) : "Not Subscribe" }}</td>
                                         </tr>
                                     </tbody>
-                                    <input type="hidden" id="subprice" name="subprice" value="10.00">
-                                    <input type="hidden" id="total_sub" name="total_sub" value="10.00">
                                 </table>
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" id="btn-subscribe">Subscribe</button>
+                                @php
+                                if($subscription != null){
+                                    if($subscription->status == "active")
+                                        echo '<button type="button" class="btn btn-primary float-right btn-cancel-subscribe">Cancel Subscribe</button>';
+                                    else
+                                        echo '<button type="button" class="btn btn-primary float-right btn-subscribe">Subscribe</button>';
+                                }else{
+                                    echo '<button type="button" class="btn btn-primary float-right btn-subscribe" >Subscribe</button>';  
+                                }
+                                @endphp
                             </div>
                         </form>
                     </div>
@@ -50,7 +55,7 @@
 <script>
 $(document).ready(function(){
 
-$("#btn-subscribe").click(function(){
+$(".btn-subscribe").click(function(){
     $.ajax({
         url: "{{ route('member.subscription.add') }}",
         data:{

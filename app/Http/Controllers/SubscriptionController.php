@@ -17,12 +17,23 @@ class SubscriptionController extends Controller
     {
         $this->middleware('super');
     }
+
+    public function index()
+    {
+        $title = "Subscription";
+
+        $getSubscription = (new UserSubscribe())->getSubscriptionList("*", "DESC", "active");
+
+        return view('payment.subscription.index', compact('title', 'getSubscription'));
+    }
     
     public function memberIndex()
     {
         $title = "Subscription";
 
-        return view('member.payment.subscription.index', compact('title'));
+        $subscription = UserSubscribe::where('user_id',Auth::user()->id)->first();
+
+        return view('member.payment.subscription.index', compact('title','subscription'));
     }
 
     //----------------------------------------------------------------- API ---------------------------------------------------------------------------------------------

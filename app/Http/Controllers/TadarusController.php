@@ -35,7 +35,7 @@ class TadarusController extends Controller
 
         $getEvent = (new Tadarus())->getEventList("*", "DESC", "active");
 
-        return view('member.tadarus.index', compact('title', 'getEvent'));
+        return view('member.event.tadarus.index', compact('title', 'getEvent'));
     }
 
     public function tadarusDetail($id)

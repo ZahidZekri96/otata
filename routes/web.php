@@ -84,6 +84,14 @@ Route::group(['prefix' => 'report'], function(){
     Route::get('/event', 'App\Http\Controllers\ReportController@event')->name('report.event');
 });
 
+Route::group(['prefix' => 'donation'], function(){
+    Route::get('/', 'App\Http\Controllers\DonationController@index')->name('donation.index');
+});
+
+Route::group(['prefix' => 'subscription'], function(){
+    Route::get('/', 'App\Http\Controllers\SubscriptionController@index')->name('subscription.index');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -97,6 +105,10 @@ Route::group(['prefix' => 'member'], function(){
         Route::post('/register/add', 'App\Http\Controllers\EventController@apiRegisterEvent')->name('member.register.add');
         Route::get('/detail/{id}', 'App\Http\Controllers\EventController@memberEventDetail')->name('member.event.detail');
         Route::post('/register/paid', 'App\Http\Controllers\EventController@apiRegisterPaidEvent')->name('member.register.paid');
+    });
+
+    Route::group(['prefix' => 'tadarus'], function(){
+        Route::get('/', 'App\Http\Controllers\TadarusController@index_member')->name('member.tadarus.index');
     });
 
     Route::group(['prefix' => 'donation'], function(){

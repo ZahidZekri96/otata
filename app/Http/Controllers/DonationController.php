@@ -18,6 +18,16 @@ class DonationController extends Controller
     {
         $this->middleware('super');
     }
+
+    public function index()
+    {
+        $title = "Donation";
+
+        $getDonation = (new Donation())->getDonationList("*", "DESC");
+
+        return view('payment.donation.index', compact('title', 'getDonation'));
+    }
+
     
     public function memberIndex()
     {

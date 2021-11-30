@@ -22,5 +22,43 @@ class UserSubscribe extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+     /*
+    |--------------------------------------------------------------------------
+    | Relationship
+    |--------------------------------------------------------------------------
+    */
+
+    public function senangpay(){
+
+        return $this->hasOne(OrderPurchPaymentSenangpay::class,'order_id','order_id');
+    }
+
+    public function user(){
+
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | End Relationship
+    |--------------------------------------------------------------------------
+    */
+
+    public function getSubscriptionList($selector="*", $order="ASC", $status="all")
+    {
+        $getDonation = UserSubscribe::select($selector);
+
+        $getDonation = $getDonation->orderBy('id',$order);
+
+        return $getDonation->get();
+    }
+
+    public function getUserById($id)
+    {
+        $getData = UserSubscribe::find($id);
+
+        return $getData;
+    }
     
 }

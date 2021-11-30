@@ -22,4 +22,32 @@ class OrderPurchPaymentSenangpay extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship
+    |--------------------------------------------------------------------------
+    */
+
+    public function donation(){
+
+        return $this->hasOne(Donation::class,'order_id','order_id');
+    }
+
+    public function usersubscribe(){
+
+        return $this->hasOne(UserSubscribe::class,'order_id','order_id');
+    }
+
+    public function users(){
+
+        return $this->hasOne(User::class,'order_id','order_id');
+    }
+
+    
+    /*
+    |--------------------------------------------------------------------------
+    | End Relationship
+    |--------------------------------------------------------------------------
+    */
 }

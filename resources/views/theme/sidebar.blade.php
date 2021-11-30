@@ -23,8 +23,8 @@
                     <span class="nav-text">Payment</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="">Subscription</a></li>
-                    <li><a class="">Donation</a></li>
+                    <li><a href="{{ route('subscription.index') }}">Subscription</a></li>
+                    <li><a href="{{ route('donation.index') }}">Donation</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
