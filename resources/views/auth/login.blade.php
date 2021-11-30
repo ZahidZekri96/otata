@@ -1,12 +1,8 @@
 @extends('auth.auth-layout')
 
 @section('content')
-<div class="container" style=";
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: auto;">
-    <div class="row justify-content-center">
+<div class="container" style="">
+    <div class="row justify-content-center" style="margin: 120px 0;">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
