@@ -54,7 +54,7 @@
 										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
 										<td>{{ ucfirst($event->type) }}</td>
-										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Edit') }}</button></td>
+										<td><a class="text-white" href="{{ route('event.detail',$event->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Edit') }}</button></a></td>
 									</tr>
 									@php 
 										$y++
@@ -88,7 +88,7 @@
 										<td>{{ date("d-m-Y", strtotime($freeEvent->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($freeEvent->event_time))}}</td>
 										<td>{{ ucfirst($freeEvent->type) }}</td>
-										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">Detail</button></td>
+										<td><a class="text-white" href="{{ route('event.detail',$freeEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">{{ ('Edit') }}</button></a></td>
 									</tr>
 									@php 
 										$t++
@@ -122,7 +122,7 @@
 										<td>{{ date("d-m-Y", strtotime($paidEvent->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($paidEvent->event_time))}}</td>
 										<td>{{ ucfirst($paidEvent->type) }}</td>
-										<td><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">Detail</button></td>
+										<td><a class="text-white" href="{{ route('event.detail',$paidEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">{{ ('Edit') }}</button></a></td>
 									</tr>
 									@php 
 										$p++
@@ -138,48 +138,48 @@
 		</div>
 	</div>
 </div>
-@endcontent
+@endsection
 
 @push('script')
 <script src="{{ asset('theme/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script>
-		(function($) {
-			var table = $('#example2').DataTable({
-				searching: false,
-				paging:true,
-				select: false,
-				//info: false,         
-				lengthChange:false 
-				
-			});
-			var table = $('#example3').DataTable({
-				searching: false,
-				paging:true,
-				select: false,
-				//info: false,         
-				lengthChange:false 
-				
-			});
-			var table = $('#example4').DataTable({
-				searching: false,
-				paging:true,
-				select: false,
-				//info: false,         
-				lengthChange:false 
-				
-			});
-			var table = $('#example5').DataTable({
-				searching: false,
-				paging:true,
-				select: false,
-				//info: false,         
-				lengthChange:false 
-				
-			});
-			$('#example tbody').on('click', 'tr', function () {
-				var data = table.row( this ).data();
-				
-			});
-		})(jQuery);
-	</script>
+	(function($) {
+		var table = $('#example2').DataTable({
+			searching: false,
+			paging:true,
+			select: false,
+			//info: false,         
+			lengthChange:false 
+			
+		});
+		var table = $('#example3').DataTable({
+			searching: false,
+			paging:true,
+			select: false,
+			//info: false,         
+			lengthChange:false 
+			
+		});
+		var table = $('#example4').DataTable({
+			searching: false,
+			paging:true,
+			select: false,
+			//info: false,         
+			lengthChange:false 
+			
+		});
+		var table = $('#example5').DataTable({
+			searching: false,
+			paging:true,
+			select: false,
+			//info: false,         
+			lengthChange:false 
+			
+		});
+		$('#example tbody').on('click', 'tr', function () {
+			var data = table.row( this ).data();
+			
+		});
+	})(jQuery);
+</script>
 @endpush

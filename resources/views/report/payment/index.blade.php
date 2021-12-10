@@ -30,7 +30,7 @@
 		</div>
 	</div>
 </div>
-@endcontent
+@endsection
 
 @push('script')
 <script src="{{ asset('theme/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>

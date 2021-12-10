@@ -42,7 +42,7 @@ Route::group(['prefix' => 'event'], function(){
     Route::get('/data', 'App\Http\Controllers\EventController@apiGetIndexDt')->name('event.dt');
     Route::post('/add', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('event.add');
     Route::get('/detail/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.detail');
-    Route::post('/update/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.update');
+    Route::post('/update', 'App\Http\Controllers\EventController@apiPutUpdateEvent')->name('event.update');
 });
 
 Route::group(['prefix' => 'tadarus'], function(){

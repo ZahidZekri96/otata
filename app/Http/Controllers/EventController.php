@@ -121,16 +121,18 @@ class EventController extends Controller
     public function apiPutUpdateEvent(Request $request)
     {
         try{
-            $event = Event::findOrFail($request->event_id);
-            $user->name          = $request->name;
-            $user->email         = $request->email;
-            $user->type          = $request->type;
-            $user->save();
+            $event = Event::findOrFail($request->id);
+            $event->event         = $request->event;
+            $event->event_date    = $request->event_date;
+            $event->event_time    = $request->event_time;
+            $event->link          = $request->event_link;
+            $event->description   = $request->description;
+            $event->save();
 
             return response()->json([
                 "status"  => true,
                 "message" => "success",
-                "object"  => $object
+                "object"  => $event->id
             ]);
 
         }catch (Exception $exception){

@@ -162,7 +162,7 @@
     </div>
 </div>
 
-@endcontent
+@endsection
 
 
 @push('script')

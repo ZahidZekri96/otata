@@ -7,14 +7,14 @@
             <div class="col-xl-12 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form id="update_event">
                         @csrf
                             <div class="form-group row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
-                                    <label for="email" class="col-form-label">{{ __('Event Name') }}<span style="color:darkred">*</span></label>
+                                    <label for="event" class="col-form-label">{{ __('Event Name') }}<span style="color:darkred">*</span></label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" placeholder="{{ __('Enter email') }} ..." id="email" name="email" value="{{ $getEvent->event }}" >
+                                        <input type="name" class="form-control" placeholder="{{ __('Enter event') }} ..." id="event" name="event" value="{{ $getEvent->event }}" >
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
@@ -23,11 +23,11 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <label for="event_date" class="col-form-label">{{ __('Event Date') }}<span style="color:darkred">*</span></label>
-                                    <input type="date" class="form-control" placeholder="{{ __('Enter first name') }} ..." id="event_date" name="event_date" value='{{ $getEvent->event_date }}' >
+                                    <input type="date" class="form-control" placeholder="{{ __('Enter event date') }} ..." id="event_date" name="event_date" value='{{ $getEvent->event_date }}' >
                                 </div>
                                 <div class="col-md-5">
                                     <label for="first_name" class="col-form-label">{{ __('Event Time') }}<span style="color:darkred">*</span></label>
-                                    <input type="time" class="form-control" placeholder="{{ __('Enter first name') }} ..." id="event_time" name="event_time" value="{{ $getEvent->event_time }}" >
+                                    <input type="time" class="form-control" placeholder="{{ __('Enter event time') }} ..." id="event_time" name="event_time" value="{{ $getEvent->event_time }}" >
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -35,7 +35,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
                                     <label for="event_date" class="col-form-label">{{ __('Event Link') }}<span style="color:darkred">*</span></label>
-                                    <input type="text" class="form-control" placeholder="{{ __('Enter Event Link') }} ..." id="event_date" name="event_date" value='{{ $getEvent->link }}' >
+                                    <input type="text" class="form-control" placeholder="{{ __('Enter Event Link') }} ..." id="event_link" name="event_link" value='{{ $getEvent->link }}' >
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
 								<div class="col-md-5">
-                                    <label for="vity" class="col-form-label">{{ __('Price') }}<span style="color:darkred">*</span></label>
+                                    <label for="type" class="col-form-label">{{ __('Price') }}<span style="color:darkred">*</span></label>
                                     @php
                                     if($getEvent->type == 'free'){
                                         $price = 0.00;
@@ -64,7 +64,7 @@
                                         $price = $getEvent->price;
                                     }
                                     @endphp
-                                    <input type="text" class="form-control" placeholder="{{ __('Price') }}" id="city" name="city" value="RM {{ number_format($price, 2, '.', '') }}">
+                                    <input type="text" class="form-control" placeholder="{{ __('Price') }}" id="price" name="price" value="RM {{ number_format($price, 2, '.', '') }}">
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -72,11 +72,11 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
                                     <label for="description" class="col-form-label">{{ __('Event Description') }}<span style="color:darkred">*</span></label>
-                                    <textarea class="form-control" rows="4" id="description">{{ $getEvent->description }}</textarea>
+                                    <textarea class="form-control" rows="4" id="description" name="description">{{ $getEvent->description }}</textarea>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
-                            <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" name="id" id="id" value="{{ $getEvent->id }}">
                             <div class="form-group row">
                                 <div class="col-md-4">
                                 </div>
@@ -94,13 +94,15 @@
 @endsection
 @push('script')
 <script>
-    $('#save_event').on('click', async function(){
-        var form1 = $('#register_event');
+$(document).ready(function () {
+    $('.btn-success').on('click', async function(){
+        var form1 = $('#update_event');
         var formData = await getAllInput(form1);
         var data = processSerialize(formData);
+        console.log(formData);
 
         $.ajax({
-            url: "{{ route('event.add') }}",
+            url: "{{ route('event.update') }}",
             data:data,
             type: "POST",
             dataType: "json",
@@ -117,5 +119,6 @@
             }
         });
     });
+});
 </script>
 @endpush

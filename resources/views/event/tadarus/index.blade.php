@@ -67,7 +67,7 @@
 <!--begin::Modal-->
 @include('event.tadarus.modals.add_event')
 <!--end::Modal-->
-@endcontent
+@endsection
 
 @push('script')
 <script src="{{ asset('theme/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
