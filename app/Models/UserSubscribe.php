@@ -12,7 +12,7 @@ class UserSubscribe extends Model
     protected $table = 'users_subscribe';
 
     protected $fillable = [
-        'user_id', 'valid_start', 'valid_end', 'status'
+        'user_id', 'order_id' , 'valid_start', 'valid_end', 'status'
     ];
 
     protected $dates = [

@@ -29,6 +29,7 @@ Route::group(['prefix' => 'senangpay'], function(){
     Route::get('/event/paid/{id}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayRegisterEvent')->name('senangpay.event.paid');
     Route::get('/donation/paid/{donation}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayDonation')->name('senangpay.donation.paid');
     Route::post('/update', 'App\Http\Controllers\SenangpayController@updateSenangpay')->name('senangpay.update.paid');
+    Route::post('/update-recurring', 'App\Http\Controllers\SenangpayController@updateRecurringSenangpay')->name('senangpay.update.recurring.paid');
     Route::get('/subscription/paid/{order_id}', 'App\Http\Controllers\SenangpayController@senangpaySubscription')->name('senangpay.subscription.paid');
     Route::get('/registration/paid', 'App\Http\Controllers\SenangpayController@senangpayRegistration')->name('senangpay.registration.paid');
 });

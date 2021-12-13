@@ -17,6 +17,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Type</th>
+												<th>Action</th>
                                             </tr>
                                         </thead>
 										<tbody>
@@ -28,7 +29,8 @@
 												<td>{{ $y }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ $user->type }}</td>
+                                                <td>{{ ucfirst($user->type) }}</td>
+												<td></td>
 											</tr>
 											@php 
 												$y++

@@ -108,7 +108,8 @@ class SenangpayController extends Controller
     {
         $getUser  = User::where('id', Auth::user()->id)->first();
 
-        $recurring_id = "163763734065";
+        //$recurring_id = "163763734065";
+        $recurring_id = "163912343293";
 
         $detail = "Otata Monthly Subscription";
         
@@ -144,19 +145,30 @@ class SenangpayController extends Controller
             $getSenangpay->save();
 
             //dd($request->order_id);
+            if($request->status == 1){
+                if($getSenangpay->type == "event"){
 
-            if($getSenangpay->type == "event"){
+                    $getEvent = EventRegister::where('order_id',$request->order_id)->first();
+                    $getEvent->status = 'success';
+                    $getEvent->save();
 
-                $getEvent = EventRegister::where('order_id',$request->order_id)->first();
-                $getEvent->status = 'success';
-                $getEvent->save();
+                }else if($getSenangpay->type == "donation"){
 
-            }else if($getSenangpay->type == "donation"){
+                    $getEvent = Donation::where('order_id',$request->order_id)->first();
+                    $getEvent->status = 'success';
+                    $getEvent->save();
 
-                $getEvent = Donation::where('order_id',$request->order_id)->first();
-                $getEvent->status = 'success';
-                $getEvent->save();
+                }else if($getSenangpay->type == "subscription"){
+                    $valid_start = date("Y-m-d H:i:s");
+                    $valid_start = strtotime($valid_start);
+                    $valid_end = date('Y-m-d H:i:s', strtotime('+1 month', $valid_start));
 
+                    $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
+                    $getUserSubscribe->valid_start   = $valid_start;
+                    $getUserSubscribe->valid_end     = $valid_end;
+                    $getUserSubscribe->status        = 'active';
+                    $getUserSubscribe->save();
+                }
             }
 
             $object['senangpay'] = $request->status;
@@ -177,7 +189,6 @@ class SenangpayController extends Controller
     public function updateRecurringSenangpay(Request $request){
         try{
 
-            
             $getSenangpay = OrderPurchPaymentSenangpay::where('order_id',$request->order_id)->first();
 
             $getSenangpay->transaction_id   = $request->transaction_id;

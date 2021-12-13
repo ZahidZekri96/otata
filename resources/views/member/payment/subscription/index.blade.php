@@ -59,7 +59,7 @@ $(".btn-subscribe").click(function(){
     $.ajax({
         url: "{{ route('member.subscription.add') }}",
         data:{
-            "cost": 100.00,
+            "cost": 150.00,
         },
         type: "POST",
         dataType: "json",

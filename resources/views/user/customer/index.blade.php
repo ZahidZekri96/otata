@@ -17,6 +17,7 @@
 										<th>Name</th>
 										<th>Email</th>
 										<th>Type</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -28,7 +29,11 @@
 										<td>{{ $y }}</td>
 										<td>{{ $user->name }}</td>
 										<td>{{ $user->email }}</td>
-										<td>{{ $user->type }}</td>
+										<td>{{ ucfirst($user->type) }}</td>
+										<td>
+											<a href="{{ route('customer.edit', $user->id) }}" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Update') }}</a>
+											<a href="" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Detail') }}</a>
+										</td>
 									</tr>
 									@php 
 										$y++
