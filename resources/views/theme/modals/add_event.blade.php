@@ -59,7 +59,7 @@
         var data = processSerialize(formData);
 
         $.ajax({
-            url: "{{ route('event.add') }}",
+            url: "{{ route('event.store') }}",
             data:data,
             type: "POST",
             dataType: "json",

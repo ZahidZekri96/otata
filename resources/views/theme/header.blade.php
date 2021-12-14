@@ -1,5 +1,5 @@
 <div class="nav-header" style="left:0">
-	<a href="index.html" class="brand-logo">
+	<a href="" class="brand-logo">
 		<img class="logo" style="max-width:100%;" src="{{ asset('media/icon/otata.jpeg') }}" alt="">
 	</a>
 

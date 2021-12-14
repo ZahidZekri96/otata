@@ -54,7 +54,10 @@
 										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
 										<td>{{ ucfirst($event->type) }}</td>
-										<td><a class="text-white" href="{{ route('event.detail',$event->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Edit') }}</button></a></td>
+										<td>
+											<a class="text-white" href="{{ route('event.edit',$event->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Edit') }}</button></a>
+											<a class="text-white" href="{{ route('event.detail',$event->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Detail') }}</button></a>
+										</td>
 									</tr>
 									@php 
 										$y++
@@ -88,7 +91,10 @@
 										<td>{{ date("d-m-Y", strtotime($freeEvent->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($freeEvent->event_time))}}</td>
 										<td>{{ ucfirst($freeEvent->type) }}</td>
-										<td><a class="text-white" href="{{ route('event.detail',$freeEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">{{ ('Edit') }}</button></a></td>
+										<td>
+											<a class="text-white" href="{{ route('event.edit',$freeEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">{{ ('Edit') }}</button></a>
+											<a class="text-white" href="{{ route('event.detail',$freeEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $freeEvent->id }}">{{ ('Detail') }}</button></a>
+										</td>
 									</tr>
 									@php 
 										$t++
@@ -122,7 +128,10 @@
 										<td>{{ date("d-m-Y", strtotime($paidEvent->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($paidEvent->event_time))}}</td>
 										<td>{{ ucfirst($paidEvent->type) }}</td>
-										<td><a class="text-white" href="{{ route('event.detail',$paidEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">{{ ('Edit') }}</button></a></td>
+										<td>
+											<a class="text-white" href="{{ route('event.edit',$paidEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">{{ ('Edit') }}</button></a>
+											<a class="text-white" href="{{ route('event.detail',$paidEvent->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $paidEvent->id }}">{{ ('Edit') }}</button></a>
+										</td>
 									</tr>
 									@php 
 										$p++

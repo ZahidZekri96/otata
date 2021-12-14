@@ -50,9 +50,9 @@
                     <span class="nav-text">Setting</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a class="">Add New Users</a></li>
-                    <li><a class="">Change Password</a></li>
-                    <li><a class="">Third Party Interagation</a></li>
+                    <li><a href="{{ route('setting.user.add') }}">Add New Users</a></li>
+                    <li><a href="{{ route('setting.password') }}">Change Password</a></li>
+                    <li><a href="{{ route('setting.thirdparty') }}">Third Party Interagation</a></li>
                 </ul>
             </li>
         </ul>
