@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tadarus extends Model
+class EventBanner extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'tadarus';
+    protected $table = 'event_banner';
 
     protected $fillable = [
-        'event', 'event_time', 'description', 'type', 'link'
+        'event_id', 'filename'
     ];
 
     protected $dates = [
@@ -30,27 +29,14 @@ class Tadarus extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function event(){
+
+        return $this->belongsTo(Event::class,'id','event_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | End Relationship
     |--------------------------------------------------------------------------
     */
-
-
-    //get event list
-    public function getEventList($selector="*", $order="ASC", $status="all")
-    {
-        $getEvent = Tadarus::select($selector)
-                        ->orderBy('id',$order);
-
-        return $getEvent->get();
-    }
-
-    public function getEventById($id)
-    {
-        $getData = Tadarus::find($id);
-
-        return $getData;
-    }
 }
-

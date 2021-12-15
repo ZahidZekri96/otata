@@ -38,6 +38,15 @@ class TadarusController extends Controller
         return view('member.event.tadarus.index', compact('title', 'getEvent'));
     }
 
+    public function eventAdd($id)
+    {
+        $title = "Add Event";
+
+        $getEvent = (new Tadarus())->getEventById($id);
+
+        return view('event.list.subviews.add', compact('title', 'getEvent'));
+    }
+
     public function tadarusDetail($id)
     {
         $title = "Event Detail";
@@ -228,6 +237,141 @@ class TadarusController extends Controller
             return response()->json([
                 "status"  => false,
                 "message" => "error"
+            ]);
+        }
+    }
+
+    //store pic tadarus
+    public function apiPostStoreTadarusBanner(Request $request)
+    {
+        try{
+            if($request['curr_photo'] == null)
+            {
+
+                if ($request->hasFile('photo'))
+                {
+                    $rulesPhoto =[
+                        'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ];
+
+                    $validatorPhoto    = Validator::make($request->all(), $rulesPhoto, [
+                        'photo.image' => __('Picture must be an image!'),
+                    ]);
+
+                    if( $validatorPhoto->fails() ){
+                        return response()->json($validatorPhoto->messages(), 200);
+                    }
+
+                    $uploadPhoto = EventBanner::where('event_id', $request->id)->first();
+                    if($uploadPhoto != null)
+                    {
+                        if($uploadPhoto->filename != $request->photo->getClientOriginalName())
+                        {
+                            Storage::disk('public_uploads')->delete('images/'.$uploadPhoto->filename);
+                            $images = $request->photo->getClientOriginalName();
+                            $images = time().'_'.$images;
+                            Storage::disk('public_uploads')->putFileAs(
+                                'images', $request->photo, $images
+                            );
+
+                            $uploadPhoto = EventBanner::where('event_id', $request->id)->first();
+                            $uploadPhoto->filename = $images;
+                            $uploadPhoto->save();
+                        }
+                    }
+                    else
+                    {
+                        $images = $request->photo->getClientOriginalName();
+                        $images = time().'_'.$images;
+                        Storage::disk('public_uploads')->putFileAs(
+                            'images', $request->photo, $images
+                        );
+
+                        //store photo
+                        $uploadPhoto = new EventBanner([
+                            'event_id'   => $request->id,
+                            'filename'   => $images,
+                        ]);
+                        $uploadPhoto->save();
+                    }
+                }
+                elseif($request['curr_photo'] == null && $request->photo == "undefined")
+                {
+                    $getPhoto = EventBanner::where('event_id', $request->id)->first();
+                    if($getPhoto != null){
+                        Storage::disk('public_uploads')->delete('images/'.$getPhoto->filename);
+                        $delPhoto = EventBanner::where('event_id', $request->id)->delete();
+                    }
+                }
+            }
+            elseif($request['edit'] == 'no')
+            {
+                //copy photo
+                $copyPhoto = new EventBanner([
+                    'event_id' => $request->id,
+                    'filename'     => $request['curr_photo'],
+                ]);
+                $copyPhoto->save();
+            }
+            elseif(isset($request['edit']) && $request['edit'] != 'no')
+            {
+                if($request->photo != 'undefined')
+                {
+                    $getPhoto = EventBanner::where('event_id', $request->id)->first();
+                    if($getPhoto != null){
+                        Storage::disk('public_uploads')->delete('images/'.$getPhoto->filename);
+                        $delPhoto = EventBanner::where('event_id', $request->id)->delete();
+                    }
+                    $images = $request->photo->getClientOriginalName();
+                    $images = time().'_'.$images;
+                    Storage::disk('public_uploads')->putFileAs(
+                        'images', $request->photo, $images
+                    );
+
+                    $copyPhoto = new EventBanner([
+                        'event_id' => $request->id,
+                        'filename'     => $images,
+                    ]);
+                    $copyPhoto->save();
+                }
+            }
+
+            return response()->json([
+                "status"  => true,
+                "message" => "success",
+                "object"  => "event"
+            ]);
+        } catch (Exception $exception){
+            return response()->json([
+                "status"  => false,
+                "message" => "error"
+            ]);
+        }
+    }
+
+    //api delete event
+    public function apiDeleteTadarus($id)
+    {
+        try
+        {
+            $delete = Tadarus::find($id);
+
+            if( $delete ){
+                $delete->delete();
+            }
+
+            $object['tadarus'] = $delete;
+
+            return response()->json([
+                "status"  => true,
+                "message" => "success",
+                "object"  => $object
+            ]);
+        }
+        catch(Exception $exception){
+            return response()->json([
+                "status"  => false,
+                "message" => "Error"
             ]);
         }
     }

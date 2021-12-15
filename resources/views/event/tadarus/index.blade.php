@@ -32,7 +32,7 @@
 										<th>Event</th>
 										<th>Event Time</th>
 										<th>Created Date</th>
-										<th>{{ ('Action') }}</th>
+										<th width="20%">{{ ('Action') }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -48,6 +48,7 @@
 										<td>
 											<button type="button" class="btn btn-primary btn-sm"><a href="{{ route('tadarus.edit',$event->id) }}" class="text-white">{{ ('Edit') }}</a></button>
 											<button type="button" class="btn btn-primary btn-sm"><a href="{{ $event->link }}" class="text-white">{{ ('Redirect') }}</a></button>									
+											<button type="button" class="btn btn-primary btn-sm btn-delete" data-id="{{ $event->id }}" data-name="{{ $event->event }}">{{ ('Delete') }}</button>
 										</td>
 									</tr>
 									@php 
@@ -66,6 +67,7 @@
 
 <!--begin::Modal-->
 @include('event.tadarus.modals.add_event')
+@include('event.tadarus.modals.delete_modal')
 <!--end::Modal-->
 @endsection
 
@@ -86,5 +88,48 @@
 			
 		});
 	})(jQuery);
+</script>
+<script>
+	$(document).ready(function(){
+		$(".btn-delete").click(function(){
+
+			var id      = $(this).data('id');
+			var name    = $(this).data('name');
+
+			$('.delete_id').val(id);
+			document.getElementById('delete_name').innerHTML    = name;
+
+			$('#modal_delete_event').modal('show');
+		});
+	});
+
+	$(document).ready(function() {
+        $('.btn-delete-event').on('click', function () {
+            deleteEvent();
+        });
+	});
+
+	function deleteEvent() {
+        var id = $('.delete_id').val();
+        var url = "{{ route('tadarus.destroy', ':id') }}";
+        url = url.replace(':id',id);
+
+        $.ajax({
+            url: url,
+            type: "DELETE",
+            dataType: "json",
+            success: function(data) {
+                if(data.message != 'success'){
+                    var errors = data;
+                    $.each(errors, function(index, sm){
+                        toastr.error(sm, {timeOut: 5000});
+                    });
+                } else{
+                    toastr.success('@lang("Event Deleted")', {timeOut: 5000});
+					window.location.href = "{{ route('tadarus.index') }}";
+                }
+            }
+        });
+    }
 </script>
 @endpush

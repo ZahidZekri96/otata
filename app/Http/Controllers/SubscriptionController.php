@@ -55,7 +55,6 @@ class SubscriptionController extends Controller
                 $getUserSubscribe -> status = 'pending';
                 $getUserSubscribe->save();
             }else{
-                dd()
                 $userSubscribe = UserSubscribe::create([
                     'status'            => 'pending',
                     'order_id'          => $order_id,

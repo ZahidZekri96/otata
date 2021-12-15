@@ -41,6 +41,8 @@ Route::group(['prefix' => 'event'], function(){
     Route::get('/add/{id}', 'App\Http\Controllers\EventController@eventAdd')->name('event.edit');
     Route::get('/detail/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.detail');
     Route::post('/update', 'App\Http\Controllers\EventController@apiPutUpdateEvent')->name('event.update');
+    Route::put('/store/pic', 'App\Http\Controllers\EventController@apiPostStoreEventBanner')->name('event.store.banner');
+    Route::delete('{id}', 'App\Http\Controllers\EventController@apiDeleteEvent')->name('event.destroy');
 });
 
 Route::group(['prefix' => 'tadarus'], function(){
@@ -49,6 +51,7 @@ Route::group(['prefix' => 'tadarus'], function(){
     Route::post('/add', 'App\Http\Controllers\TadarusController@apiPostStoreTadarus')->name('tadarus.add');
     Route::get('/detail/{id}', 'App\Http\Controllers\TadarusController@tadarusDetail')->name('tadarus.edit');
     Route::post('/update', 'App\Http\Controllers\TadarusController@apiPutUpdateTadarus')->name('tadarus.update');
+    Route::delete('{id}', 'App\Http\Controllers\TadarusController@apiDeleteTadarus')->name('tadarus.destroy');
 });
 
 Route::group(['prefix' => 'customer'], function(){

@@ -19,8 +19,13 @@
 							<div class="col-md-10">
 								<table class="table table-bordered table-striped" width="100%">
 									<tbody>
-										<tr>
-										</tr>
+									<tr>
+										<td colspan="2">
+											@if($getEvent->banner != null)
+												<img src="{{asset('storage/images/'.$getEvent->banner->filename) }}" width="100%" height="100%" style="display: block; margin-left: auto; margin-right: auto;">
+											@endif
+										</td>
+									</tr>
 										<tr>
 											<td width="20%">{{ __('Event') }}</td>
 											<td>{{ $getEvent->event }}</td>

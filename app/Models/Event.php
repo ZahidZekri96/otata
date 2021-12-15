@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'event';
 
@@ -32,6 +33,11 @@ class Event extends Model
     public function event_register()
     {
         return $this->hasMany(EventRegister::class, 'event_id', 'id');
+    }
+
+    public function banner()
+    {
+        return $this->hasOne(EventBanner::class,'event_id','id');
     }
 
     /*
