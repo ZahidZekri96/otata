@@ -99,7 +99,6 @@ $(document).ready(function () {
         var form1 = $('#update_event');
         var formData = await getAllInput(form1);
         var data = processSerialize(formData);
-        console.log(formData);
 
         $.ajax({
             url: "{{ route('event.update') }}",

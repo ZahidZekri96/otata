@@ -38,7 +38,7 @@ Route::group(['prefix' => 'event'], function(){
     Route::get('/list', 'App\Http\Controllers\EventController@index')->name('event.list');
     Route::get('/data', 'App\Http\Controllers\EventController@apiGetIndexDt')->name('event.dt');
     Route::post('/store', 'App\Http\Controllers\EventController@apiPostStoreEvent')->name('event.store');
-    Route::get('/add/{id}', 'App\Http\Controllers\EventController@eventAdd')->name('event.edit');
+    Route::get('/add/{id}', 'App\Http\Controllers\EventController@eventEdit')->name('event.edit');
     Route::get('/detail/{id}', 'App\Http\Controllers\EventController@eventDetail')->name('event.detail');
     Route::post('/update', 'App\Http\Controllers\EventController@apiPutUpdateEvent')->name('event.update');
     Route::put('/store/pic', 'App\Http\Controllers\EventController@apiPostStoreEventBanner')->name('event.store.banner');
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'tadarus'], function(){
     Route::get('/data', 'App\Http\Controllers\TadarusController@apiGetIndexDt')->name('tadarus.dt');
     Route::post('/add', 'App\Http\Controllers\TadarusController@apiPostStoreTadarus')->name('tadarus.add');
     Route::get('/detail/{id}', 'App\Http\Controllers\TadarusController@tadarusDetail')->name('tadarus.edit');
-    Route::post('/update', 'App\Http\Controllers\TadarusController@apiPutUpdateTadarus')->name('tadarus.update');
+    Route::put('/update', 'App\Http\Controllers\TadarusController@apiPutUpdateTadarus')->name('tadarus.update');
     Route::delete('{id}', 'App\Http\Controllers\TadarusController@apiDeleteTadarus')->name('tadarus.destroy');
 });
 
@@ -59,8 +59,9 @@ Route::group(['prefix' => 'customer'], function(){
     Route::get('/add', 'App\Http\Controllers\CustomerController@add')->name('customer.add');
     Route::get('/edit/{id}', 'App\Http\Controllers\CustomerController@edit')->name('customer.edit');    
     Route::get('/info/{id}', 'App\Http\Controllers\CustomerController@info')->name('customer.info');
-    Route::put('/update/{id}', 'App\Http\Controllers\CustomerController@apiPutUpdateUser')->name('customer.update');
+    Route::put('/update', 'App\Http\Controllers\CustomerController@apiPutUpdateUser')->name('customer.update');
     Route::post('/store', 'App\Http\Controllers\CustomerController@apiPostStoreUser')->name('customer.store');
+    Route::delete('{id}', 'App\Http\Controllers\CustomerController@apiDeleteCustomer')->name('customer.destroy');
 });
 
 Route::group(['prefix' => 'admin'], function(){

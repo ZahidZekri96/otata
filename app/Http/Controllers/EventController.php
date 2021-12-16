@@ -49,13 +49,13 @@ class EventController extends Controller
         return view('member.event.list.index', compact('title', 'getEvent' , 'getFreeEvent' , 'getPaidEvent'));
     }
 
-    public function eventAdd($id)
+    public function eventEdit($id)
     {
         $title = "Add Event";
 
         $getEvent = (new Event())->getEventById($id);
 
-        return view('event.list.subviews.add', compact('title', 'getEvent'));
+        return view('event.list.subviews.edit', compact('title', 'getEvent'));
     }
 
     public function eventDetail($id)
