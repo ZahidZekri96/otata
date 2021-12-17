@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Models\User;
-use App\Models\UserInfo;
+use App\Models\UsersInfo;
 
 class AdminController extends Controller
 {
@@ -34,7 +34,7 @@ class AdminController extends Controller
         return view('user.admin.subviews.add', compact('title'));
     }
 
-    public function edit()
+    public function edit($id)
     {
         $title = "Edit Admin";
 
@@ -116,29 +116,26 @@ class AdminController extends Controller
     }
 
     //api update agent
-    public function apiPutUpdateUser(Request $request, $id)
+    public function apiPutUpdateUser(Request $request)
     {
         try{
-            $user = User::findOrFail($request->user_id);
+            $user = User::findOrFail($request->id);
             $user->name          = $request->name;
-            
-            if(!empty($request->password)){
-            	$user->password  = Hash::make($request->password);
-            }
             $user->email         = $request->email;
             $user->type          = $request->type;
             $user->save();
 
-            $userinfo = UserInfo::findOrFail($request->id);
+            $userinfo = UsersInfo::findOrFail($request->userinfo_id);
             $userinfo->address   = $request->address;
             $userinfo->postcode  = $request->postcode;
             $userinfo->city      = $request->city;
             $userinfo->state     = $request->state;
             $userinfo->country   = $request->country;
             $userinfo->gender    = $request->gender;
+            $userinfo->hpnum     = $request->phone;
             $userinfo->save();
 
-            $object['agent'] = $id;
+            $object['admin'] = $user->id;
 
             return response()->json([
                 "status"  => true,

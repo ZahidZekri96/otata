@@ -36,59 +36,163 @@
 <script src="{{ asset('theme/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('theme/vendor/chart.js/Chart.bundle.min.js') }}"></script>
 <script src="{{ asset('theme/js/plugins-init/chartjs-init.js') }}"></script>
-
 <script>
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        datasets: [{
-            label: 'Total Donation',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+    $(document).ready(function() {
 
-const ctx2 = document.getElementById('myChart2').getContext('2d');
-const myChart2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        datasets: [{
-            label: 'Total Donation',
-            data: [92, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+        tableDonationWeekly();
+
+        tableRegisterWeekly();
+
+    });
+
+    function tableDonationWeekly(){
+        $.ajax({
+            url: "{{ route('donation.report.weekly') }}",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+
+                var curr = new Date();
+                var first = curr.getDate() - curr.getDay();
+                var last = first + 7; 
+                var lastday = new Date(curr.setDate(last));
+
+                var test = [];
+                var taxis = [];  
+                
+                var i;
+                var t=0;
+
+                for (i = 6; i >= 0; i--) {
+                    const yesterday = new Date(lastday);
+                    yesterday.setDate(yesterday.getDate() - i);
+
+                    yesterday.toDateString();
+                    var month = yesterday.getMonth()+1;
+                    if(month<10){
+                        month = "0"+month;
+                    }
+
+                    var toda = yesterday.getDate();
+                    if(toda<10){
+                        toda="0"+toda;
+                    }
+
+                    var y = toda+"-"+month+"-"+yesterday.getFullYear();
+                    var z = yesterday.getFullYear()+"-"+month+"-"+toda;
+
+                    taxis.push([y]);
+
+                    $.each(data.object.seven, function(index, d){
+                        if(z == d.date){
+                            test[t]=[d.total_donation];
+                        }
+                    });
+                    
+                    t++;
+                }
+
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: taxis,
+                        datasets: [{
+                            label: 'Total Donation (RM)',
+                            data: test,
+                            borderWidth: 1,
+                            backgroundColor: "#FE634E",
+                        }],
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+
             }
-        }
+        });
     }
-});
+
+    function tableRegisterWeekly(){
+        $.ajax({
+            url: "{{ route('register.report.weekly') }}",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+
+                var curr = new Date();
+                var first = curr.getDate() - curr.getDay();
+                var last = first + 7; 
+                var lastday = new Date(curr.setDate(last));
+
+                var test = [];
+                var taxis = [];  
+                
+                var i;
+                var t=0;
+
+                for (i = 6; i >= 0; i--) {
+                    const yesterday = new Date(lastday);
+                    yesterday.setDate(yesterday.getDate() - i);
+
+                    yesterday.toDateString();
+                    var month = yesterday.getMonth()+1;
+                    if(month<10){
+                        month = "0"+month;
+                    }
+
+                    var toda = yesterday.getDate();
+                    if(toda<10){
+                        toda="0"+toda;
+                    }
+
+                    var y = toda+"-"+month+"-"+yesterday.getFullYear();
+                    var z = yesterday.getFullYear()+"-"+month+"-"+toda;
+
+                    taxis.push([y]);
+
+                    $.each(data.object.seven, function(index, d){
+                        if(z == d.date){
+                            test[t]=[d.count];
+                        }
+                    });
+                    
+                    t++;
+                }
+
+                const ctx = document.getElementById('myChart2').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: taxis,
+                        datasets: [{
+                            label: 'Total Register',
+                            data: test,
+                            borderWidth: 1,
+                            backgroundColor: "#FE634E",
+                        }],
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    precision:0
+                                }
+                            }]
+                        }
+                    }
+                });
+
+            }
+        });
+    }
 </script>
 
 @endpush

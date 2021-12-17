@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/add', 'App\Http\Controllers\AdminController@add')->name('admin.add');
     Route::get('/edit/{id}', 'App\Http\Controllers\AdminController@edit')->name('admin.edit');
     Route::get('/info/{id}', 'App\Http\Controllers\AdminController@info')->name('admin.info');
-    Route::put('/update/{id}', 'App\Http\Controllers\AdminController@apiPutUpdateUser')->name('admin.update');
+    Route::put('/update', 'App\Http\Controllers\AdminController@apiPutUpdateUser')->name('admin.update');
     Route::post('/store', 'App\Http\Controllers\AdminController@apiPostStoreUser')->name('admin.store');
 });
 
@@ -84,6 +84,8 @@ Route::group(['prefix' => 'setting'], function(){
 Route::group(['prefix' => 'report'], function(){
     Route::get('/payment', 'App\Http\Controllers\ReportController@payment')->name('report.payment');
     Route::get('/event', 'App\Http\Controllers\ReportController@event')->name('report.event');
+    Route::get('/donation/weekly', 'App\Http\Controllers\ReportController@getApiWeeklyDonation')->name('donation.report.weekly');
+    Route::get('/register/weekly', 'App\Http\Controllers\ReportController@getApiWeeklyRegister')->name('register.report.weekly');
 });
 
 Route::group(['prefix' => 'donation'], function(){
