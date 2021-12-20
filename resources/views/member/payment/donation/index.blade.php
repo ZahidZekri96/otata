@@ -5,6 +5,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-8 mx-auto">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{$errors->first()}}
+                    </div>
+                @endif
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="card ">
                     <div class="card-body">
                         <form>
@@ -22,7 +32,6 @@
                                 <label class="text-black font-w500">Payment Method</label>
                                 <div class="dropdown bootstrap-select form-control form-control-lg default-select">
                                     <select class="form-control form-control-lg default-select" tabindex="-98" name="donation_type" id="donation_type">
-                                        <option value="toyyibpay">toyyibPay</option>
                                         <option value="senangpay">senangPay</option>
                                     </select>
                                 </div>
@@ -38,6 +47,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @push('script')

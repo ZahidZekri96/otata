@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 
 use App\Models\OrderPurchPaymentSenangpay;
 use App\Models\Donation;
@@ -45,8 +47,8 @@ class SenangpayController extends Controller
 
         $phone = $getUser->userinfo->hpnum;
 
-        $hash_str = "236-823".$detail."".$amount."".$order_id;
-        $hash=hash_hmac('sha256', $hash_str, '236-823');
+        $hash_str = "32145-562".$detail."".$amount."".$order_id;
+        $hash=hash_hmac('sha256', $hash_str, '32145-562');
         
         return view('senangpay.payment', compact('detail','amount', 'order_id', 'name', 'email','phone', 'hash'));
     }
@@ -150,34 +152,48 @@ class SenangpayController extends Controller
 
                     $getEvent = EventRegister::where('order_id',$request->order_id)->first();
                     $getEvent->status = 'success';
+                    $url = "member/event/list";
+                    $status = "Event Succesfully Register";
                     $getEvent->save();
 
                 }else if($getSenangpay->type == "donation"){
 
                     $getEvent = Donation::where('order_id',$request->order_id)->first();
                     $getEvent->status = 'success';
+                    $url = "member/donation";
+                    $status = "Donation Success";
                     $getEvent->save();
 
-                }else if($getSenangpay->type == "subscription"){
-                    $valid_start = date("Y-m-d H:i:s");
-                    $valid_start = strtotime($valid_start);
-                    $valid_end = date('Y-m-d H:i:s', strtotime('+1 month', $valid_start));
-
-                    $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
-                    $getUserSubscribe->valid_start   = $valid_start;
-                    $getUserSubscribe->valid_end     = $valid_end;
-                    $getUserSubscribe->status        = 'active';
-                    $getUserSubscribe->save();
                 }
+                return redirect($url)->with('message', $status);
+            }else if($request->status == 1){
+                if($getSenangpay->type == "event"){
+
+                    $getEvent = EventRegister::where('order_id',$request->order_id)->first();
+                    $getEvent->status = 'failed';
+                    $url = "member/event/list";
+                    $status = "Event Succesfully Failed. Please Try Again or call us";
+                    $getEvent->save();
+
+                }else if($getSenangpay->type == "donation"){
+
+                    $getEvent = Donation::where('order_id',$request->order_id)->first();
+                    $getEvent->status = 'failed';
+                    $url = "member/donation";
+                    $status = "Donation Failed. Please try again or call us.";
+                    $getEvent->save();
+
+                }
+                return redirect($url)->withErrors(['msg' => $status]);;
             }
 
             $object['senangpay'] = $request->status;
 
-            return response()->json([
-                "status"  => true,
-                "message" => "success",
-                "object"  => $object
-            ]);
+            // return response()->json([
+            //     "status"  => true,
+            //     "message" => "success",
+            //     "object"  => $object
+            // ]);
         } catch (Exception $exception){
             return response()->json([
                 "status"  => false,
@@ -204,11 +220,17 @@ class SenangpayController extends Controller
             $valid_start = strtotime($valid_start);
             $valid_end = date('Y-m-d H:i:s', strtotime('+1 month', $valid_start));
 
-            $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
-            $getUserSubscribe->valid_start   = $valid_start;
-            $getUserSubscribe->valid_end     = $valid_end;
-            $getUserSubscribe->status        = 'active';
-            $getUserSubscribe->save();
+            if($getSenangpay->status == 1){
+                $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
+                $getUserSubscribe->valid_start   = $valid_start;
+                $getUserSubscribe->valid_end     = $valid_end;
+                $getUserSubscribe->status        = 'active';
+                $getUserSubscribe->save();
+            }else{
+                $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
+                $getUserSubscribe->status        = 'not active';
+                $getUserSubscribe->save();
+            }
 
             $object['senangpay'] = $request->status;
 

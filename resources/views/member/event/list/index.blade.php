@@ -258,6 +258,9 @@
 		</div>
 	</div>
 </div>
+
+@include('member.event.list.modal.register')
+
 @endsection
 
 @push('script')
