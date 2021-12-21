@@ -5,6 +5,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12 mx-auto">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{ str_replace("_", " ", $errors->first()) }}
+                    </div>
+                @endif
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="card ">
                     <div class="card-body">
                         <form>

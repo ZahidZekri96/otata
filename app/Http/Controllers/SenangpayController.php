@@ -27,6 +27,11 @@ class SenangpayController extends Controller
         return view('senangpay.return');
     }
 
+    public function returnRecurring()
+    {
+        return view('senangpay.return_recurring');
+    }
+
     public function senangpayRegisterEvent($id,$order_id)
     {
         $getUser  = User::where('id', Auth::user()->id)->first();
@@ -204,7 +209,7 @@ class SenangpayController extends Controller
 
     public function updateRecurringSenangpay(Request $request){
         try{
-
+            
             $getSenangpay = OrderPurchPaymentSenangpay::where('order_id',$request->order_id)->first();
 
             $getSenangpay->transaction_id   = $request->transaction_id;
@@ -215,6 +220,9 @@ class SenangpayController extends Controller
                 $getSenangpay->state          = 'failed';
             }
             $getSenangpay->save();
+            
+            $message = $request->msg;
+            $url     = route('member.subscription');
 
             $valid_start = date("Y-m-d H:i:s");
             $valid_start = strtotime($valid_start);
@@ -225,14 +233,16 @@ class SenangpayController extends Controller
                 $getUserSubscribe->valid_start   = $valid_start;
                 $getUserSubscribe->valid_end     = $valid_end;
                 $getUserSubscribe->status        = 'active';
+                $status = "You Have Succesfully Subscribe";
                 $getUserSubscribe->save();
-            }else{
+                return redirect($url)->with('message', $status);
+            }else if($getSenangpay->status == 0){
                 $getUserSubscribe = UserSubscribe::where('order_id',$request->order_id)->first();
                 $getUserSubscribe->status        = 'not active';
                 $getUserSubscribe->save();
-            }
 
-            $object['senangpay'] = $request->status;
+                return redirect($url)->withErrors(['msg' => $message]);;
+            }
 
             return response()->json([
                 "status"  => true,

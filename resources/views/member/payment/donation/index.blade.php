@@ -7,7 +7,7 @@
             <div class="col-xl-8 mx-auto">
                 @if($errors->any())
                     <div class="alert alert-danger">
-                        {{$errors->first()}}
+                        {{ str_replace("_", " ", $errors->first()) }}
                     </div>
                 @endif
                 @if(session()->has('message'))

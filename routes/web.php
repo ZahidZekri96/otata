@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'senangpay'], function(){
     Route::get('/', 'App\Http\Controllers\SenangpayController@index')->name('senangpay');
     Route::get('/return', 'App\Http\Controllers\SenangpayController@return')->name('senangpay.return');
+    Route::get('/return-recurring', 'App\Http\Controllers\SenangpayController@returnRecurring')->name('senangpay.recurring.return');
     Route::get('/event/paid/{id}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayRegisterEvent')->name('senangpay.event.paid');
     Route::get('/donation/paid/{donation}/{order_id}', 'App\Http\Controllers\SenangpayController@senangpayDonation')->name('senangpay.donation.paid');
     Route::post('/update', 'App\Http\Controllers\SenangpayController@updateSenangpay')->name('senangpay.update.paid');
