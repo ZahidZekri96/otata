@@ -29,7 +29,7 @@ class MainController extends Controller
         
         $getPaidEvent = Event::where("type" , "paid")->orderBy('id', 'desc')->take(5)->get();
 
-        $totalDonationWeek = Donation::whereBetween('created_at', [Carbon::now('+ 1 day')->startOfWeek(), Carbon::now()->endOfWeek()])->where('status','success')->sum('cost');
+        $totalDonationWeek = Donation::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('status','success')->sum('cost');
 
         $totalDonation = Donation::where('status','success')->sum('cost');
 

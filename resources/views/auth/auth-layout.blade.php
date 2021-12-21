@@ -30,11 +30,6 @@
 	<!-- Chart piety plugin files -->
     <script src="{{ asset('theme/vendor/peity/jquery.peity.min.js') }}"></script>
 	
-	<!-- Apex Chart -->
-	<script src="{{ asset('theme/vendor/apexchart/apexchart.js') }}"></script>
-	
-	<!-- Dashboard 1 -->
-	<script src="{{ asset('theme/js/dashboard/dashboard-1.js') }}"></script>
     @stack('script')
 </body>
 </html>

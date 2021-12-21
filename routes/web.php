@@ -77,7 +77,7 @@ Route::group(['prefix' => 'setting'], function(){
     Route::get('/add', 'App\Http\Controllers\SettingController@addUser')->name('setting.user.add');
     Route::put('/update/{id}', 'App\Http\Controllers\SettingController@apiPutUpdateUser')->name('setting.user.update');
     Route::get('/password', 'App\Http\Controllers\SettingController@changePassword')->name('setting.password');
-    Route::put('/change-password/{id}', 'App\Http\Controllers\ProfileController@putApiUpdatePassword')->name('setting.password.update');
+    Route::put('/change-password/{id}', 'App\Http\Controllers\SettingController@putApiUpdatePassword')->name('setting.password.update');
     Route::get('/third-party', 'App\Http\Controllers\SettingController@thirdPartyInteragation')->name('setting.thirdparty');
 });
 

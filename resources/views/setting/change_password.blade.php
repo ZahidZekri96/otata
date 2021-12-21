@@ -7,7 +7,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <form name="user">
+                        <form>
                         @csrf
                             <div class="form-group row">
                                 <div class="col-md-1"></div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
-                            <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" name="id" id="id" value="{{ Auth::user()->id }}">
                             <div class="form-group row">
                                 <div class="col-md-4">
                                 </div>
@@ -78,26 +78,6 @@
 @push('script')
 <script>
 
-    jQuery(document).ready(function () {
-        "use strict";
-        var options = {};
-        options.ui = {
-            bootstrap4: true,
-            container: "#pwd-container",
-            viewports: {
-                progress: ".pwstrength_viewport_progress"
-            },
-            showVerdictsInsideProgressBar: true
-        };
-        options.common = {
-            debug: true,
-            onLoad: function () {
-                $('#messages').text('Start typing password');
-            }
-        };
-        $('#password').pwstrength(options);
-    });
-
     $(document).ready(function () {
         // update agent
         $('#update_password').on('click', async function(){
@@ -107,6 +87,8 @@
             var id      = $('#id').val();
             var url     = "{{ route('setting.password.update', ':id') }}";
             url         = url.replace(':id',id);
+
+            console.log(url);
 
             $.ajax({
                 url: url,
@@ -127,5 +109,4 @@
         });
     });
 </script>
-<script src="{{ asset('js/custm.js') }}"></script>
 @endpush
