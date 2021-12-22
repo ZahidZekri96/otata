@@ -34,6 +34,11 @@ class EventRegister extends Model
     //     return $this->hasOne(OrderPurchPaymentSenangpay::class, 'order_id', 'order_id');
     // }
 
+    public function event()
+    {
+        return $this->hasOne(Event::class, 'id', 'event_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | End Relationship

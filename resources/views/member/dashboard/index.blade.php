@@ -11,7 +11,7 @@
 						<div class="mx-auto">
 							<div class="text-center">
 								<p class="fs-14 mb-1">Donation of This Week</p>
-								<span class="fs-35 text-black font-w600">RM 10.00
+								<span class="fs-35 text-black font-w600">RM {{ $totalDonationWeek }}
 								</span>
 							</div>
 						</div>
@@ -24,7 +24,7 @@
                         <div class="mx-auto">
 							<div class="text-center">
 								<p class="fs-14 mb-1">Total Donation</p>
-								<span class="fs-35 text-black font-w600">RM 93.00
+								<span class="fs-35 text-black font-w600">RM {{ $totalDonation }}
 							</div>
 						</div>
 					</div>
@@ -36,7 +36,7 @@
                         <div class="mx-auto">
 							<div class="text-center">
 								<p class="fs-14 mb-1">Joined Event</p>
-								<span class="fs-35 text-black font-w600">2
+								<span class="fs-35 text-black font-w600">{{ $totalEventRegister }}
 								</span>
 							</div>
 						</div>
@@ -69,9 +69,9 @@
                                 @foreach ($getUpcomingEvent as $upcoming)
                                 <tr>
                                     <td>{{ $y }}</td>
-                                    <td>{{ $upcoming->event  }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($upcoming->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Join</button></td>
+                                    <td>{{ $upcoming->event->event  }}</td>
+                                    <td>{{ date("d-m-Y", strtotime($upcoming->event->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
+                                    <td><a href="{{ $upcoming->event->link }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Redirect') }}</button></a></td>
                                 </tr>
                                 @php 
                                     $y++
