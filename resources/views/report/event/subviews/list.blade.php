@@ -15,6 +15,7 @@
 									<tr>
 										<th>ID</th>
 										<th>{{ __('Name') }}</th>
+										<th>{{ __('E-mail') }}</th>
 										<th>{{ __('Registered Date') }}</th>
 										<th>{{ __('Registered Time') }} </th>
 								</thead>
@@ -23,12 +24,15 @@
 										$t=1
 									@endphp
 									@foreach ($getRegistered as $registered)
+									@if ($registered->user != null)
 									<tr>
 										<td>{{ $t }}</td>
-										<td>{{ $event->event }}</td>
-										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
-										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
+										<td>{{ $registered->user->name}}</td>
+										<td>{{ $registered->user->email}}</td>
+										<td>{{ date("d-m-Y", strtotime($registered->created_at)) }}</td>
+										<td>{{date("h:i A", strtotime($registered->created_at))}}</td>
 									</tr>
+									@endif
 									@php 
 										$t++
 									@endphp

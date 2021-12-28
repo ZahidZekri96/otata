@@ -52,7 +52,6 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('setting.user.add') }}">Add New Users</a></li>
                     <li><a href="{{ route('setting.password') }}">Change Password</a></li>
-                    <li><a href="{{ route('setting.thirdparty') }}">Third Party Interagation</a></li>
                 </ul>
             </li>
         </ul>

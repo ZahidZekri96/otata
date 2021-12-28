@@ -32,7 +32,7 @@ class ReportController extends Controller
     {
         $title = "Event Summary";
         
-        $getEvent = (new Event())->getEventList("*", "ASC", "active");
+        $getEvent = Event::withCount('event_register')->orderBy('id','asc')->get();
 
         return view('report.event.index', compact('title', 'getEvent'));
     }
@@ -41,7 +41,7 @@ class ReportController extends Controller
     {
         $title = "Registered List";
 
-        $getRegistered = (new EventRegister())->getEventById($id);
+        $getRegistered = EventRegister::where('event_id',$id)->with('user')->get();
 
         return view('report.event.subviews.list', compact('title', 'getRegistered'));
     }
