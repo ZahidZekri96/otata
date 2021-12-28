@@ -10,6 +10,7 @@ use DB;
 use App\Models\User;
 use App\Models\UserSubscribe;
 use App\Models\Event;
+use App\Models\EventRegister;
 use App\Models\Donation;
 
 class ReportController extends Controller
@@ -34,6 +35,15 @@ class ReportController extends Controller
         $getEvent = (new Event())->getEventList("*", "ASC", "active");
 
         return view('report.event.index', compact('title', 'getEvent'));
+    }
+
+    public function eventRegisteredList($id)
+    {
+        $title = "Registered List";
+
+        $getRegistered = (new EventRegister())->getEventById($id);
+
+        return view('report.event.subviews.list', compact('title', 'getRegistered'));
     }
 
     public function getApiWeeklyDonation()

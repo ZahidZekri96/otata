@@ -85,6 +85,7 @@ Route::group(['prefix' => 'setting'], function(){
 Route::group(['prefix' => 'report'], function(){
     Route::get('/payment', 'App\Http\Controllers\ReportController@payment')->name('report.payment');
     Route::get('/event', 'App\Http\Controllers\ReportController@event')->name('report.event');
+    Route::get('/event/registered/{id}', 'App\Http\Controllers\ReportController@eventRegisteredList')->name('report.registered');
     Route::get('/donation/weekly', 'App\Http\Controllers\ReportController@getApiWeeklyDonation')->name('donation.report.weekly');
     Route::get('/register/weekly', 'App\Http\Controllers\ReportController@getApiWeeklyRegister')->name('register.report.weekly');
 });

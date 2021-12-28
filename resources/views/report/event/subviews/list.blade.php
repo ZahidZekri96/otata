@@ -14,29 +14,20 @@
                                 <thead>
 									<tr>
 										<th>ID</th>
-										<th>{{ __('Event') }}</th>
-										<th>{{ __('Event Date') }}</th>
-										<th>{{ __('Event Time') }} </th>
-										<th>{{ __('Type') }}</th>
-										<th>{{ __('Total Registerd') }}</th>
-										<th>{{ __('Action') }}</th>
-									</tr>
+										<th>{{ __('Name') }}</th>
+										<th>{{ __('Registered Date') }}</th>
+										<th>{{ __('Registered Time') }} </th>
 								</thead>
 								<tbody>
 									@php
 										$t=1
 									@endphp
-									@foreach ($getEvent as $event)
+									@foreach ($getRegistered as $registered)
 									<tr>
 										<td>{{ $t }}</td>
 										<td>{{ $event->event }}</td>
 										<td>{{ date("d-m-Y", strtotime($event->event_date)) }}</td>
 										<td>{{date("h:i A", strtotime($event->event_time))}}</td>
-										<td>{{ ucfirst($event->type) }}</td>
-										<td></td>
-										<td>
-											<button type="button" class="btn btn-primary btn-sm"><a href="{{ $event->link }}" class="text-white">{{ ('Redirect') }}</a></button>
-										</td>
 									</tr>
 									@php 
 										$t++
