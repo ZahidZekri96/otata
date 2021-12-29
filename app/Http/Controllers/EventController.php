@@ -51,7 +51,7 @@ class EventController extends Controller
 
     public function eventEdit($id)
     {
-        $title = "Add Event";
+        $title = "Edit Event";
 
         $getEvent = (new Event())->getEventById($id);
 
@@ -73,7 +73,7 @@ class EventController extends Controller
 
         $getEvent = (new Event())->getEventById($id);
 
-        return view('member.event.list.subviews.info', compact('title', 'getEvent'));
+        return view('member.event.list.subviews.detail', compact('title', 'getEvent'));
     }
 
 
@@ -161,11 +161,17 @@ class EventController extends Controller
     {
         try{
 
-            $event = EventRegister::create([
-                'event_id'      => $request->event,
-                'user_id'       => $request->id,
-                'status'        => 'registered'
-            ]);
+            $getRegistered = EventRegister::find($request->id);
+
+            if($getRegistered == null){
+
+                $event = EventRegister::create([
+                    'event_id'      => $request->event,
+                    'user_id'       => $request->id,
+                    'status'        => 'registered'
+                ]);
+            }
+            
 
             return response()->json([
                 "status"  => true,
@@ -207,40 +213,6 @@ class EventController extends Controller
             ]);
 
             $object['order_id'] = $order_id;
-
-            // $amount = ($getEvent->price)*100;
-            // $amount = (int)$amount;
-
-            // $digits = 5;
-            // $invoiceno = rand(pow(10, $digits-1), pow(10, $digits)-1);
-
-            // $option = array(
-            //     'userSecretKey'=>'i2ss8my7-lvas-tchg-n28s-k4azerqyit3s',
-            //     'categoryCode'=>'awckryp5',
-            //     'billName'=>'Otata',
-            //     'billDescription'=>'Otata Event Registration',
-            //     'billPriceSetting'=>1,
-            //     'billPayorInfo'=>1,
-            //     'billAmount'=>$amount,
-            //     'billReturnUrl'=>route('member.event.list'),
-            //     'billCallbackUrl'=>route('member.event.list'),
-            //     'billExternalReferenceNo' => $invoiceno,
-            //     'billTo'=>$getUser->name,
-            //     'billEmail'=>$getUser->email,
-            //     'billPhone'=>$getUser->userinfo->hpnum,
-            //     'billSplitPayment'=>0,
-            //     'billSplitPaymentArgs'=>'',
-            //     'billPaymentChannel'=>'0',
-            //     'billDisplayMerchant'=>1,
-            //     'billContentEmail'=>'Thank you for purchasing our product!',
-            //     'billChargeToCustomer'=>1
-            // );
-
-            // $url = 'https://dev.toyyibpay.com/index.php/api/createBill';
-            // $response = Http::asForm()->post($url, $option);
-            // $result = json_decode($response);
-            // $billCode = $response[0]['BillCode'];
-            // $url='https://dev.toyyibpay.com/'.$billCode;
 
             return response()->json([
                 "status"  => true,

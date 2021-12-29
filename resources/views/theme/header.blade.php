@@ -3,11 +3,6 @@
 		<img class="logo" style="max-width:100%;" src="{{ asset('media/icon/otata.jpeg') }}" alt="">
 	</a>
 
-	<div class="nav-control">
-		<div class="hamburger">
-			<span class="line"></span><span class="line"></span><span class="line"></span>
-		</div>
-	</div>
 </div>
 <div class="header">
 	<div class="header-content">
