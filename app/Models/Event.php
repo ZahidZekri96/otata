@@ -13,7 +13,7 @@ class Event extends Model
     protected $table = 'event';
 
     protected $fillable = [
-        'event', 'event_date', 'event_time', 'description', 'type', 'link', 'price'
+        'event', 'event_date', 'event_time', 'location', 'description', 'type', 'link', 'price'
     ];
 
     protected $dates = [

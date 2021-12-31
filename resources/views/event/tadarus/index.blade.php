@@ -46,8 +46,8 @@
 										<td>{{ date("h:i A", strtotime($event->event_time)) }}</td>
 										<td>{{ date("d/m/Y h:i A", strtotime($event->created_at)) }}</td>
 										<td>
-											<button type="button" class="btn btn-primary btn-sm"><a href="{{ route('tadarus.edit',$event->id) }}" class="text-white">{{ ('Edit') }}</a></button>
-											<button type="button" class="btn btn-primary btn-sm"><a href="{{ $event->link }}" class="text-white">{{ ('Redirect') }}</a></button>									
+											<a href="{{ route('tadarus.edit',$event->id) }}" class="text-white"><button type="button" class="btn btn-primary btn-sm">{{ ('Edit') }}</button></a>
+											<a class="text-white" href="{{ route('tadarus.detail',$event->id) }}"><button type="button" class="btn btn-primary btn-sm" data-id="{{ $event->id }}">{{ ('Detail') }}</button></a>							
 											<button type="button" class="btn btn-primary btn-sm btn-delete" data-id="{{ $event->id }}" data-name="{{ $event->event }}">{{ ('Delete') }}</button>
 										</td>
 									</tr>

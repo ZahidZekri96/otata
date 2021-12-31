@@ -47,13 +47,22 @@ class TadarusController extends Controller
         return view('event.list.subviews.add', compact('title', 'getEvent'));
     }
 
+    public function tadarusEdit($id)
+    {
+        $title = "Edit Event";
+
+        $getEvent = (new Tadarus())->getEventById($id);
+
+        return view('event.tadarus.subviews.edit', compact('title', 'getEvent'));
+    }
+
     public function tadarusDetail($id)
     {
         $title = "Event Detail";
 
         $getEvent = (new Tadarus())->getEventById($id);
 
-        return view('event.tadarus.subviews.info', compact('title', 'getEvent'));
+        return view('event.tadarus.subviews.detail', compact('title', 'getEvent'));
     }
 
     public function memberTadarusDetail($id)

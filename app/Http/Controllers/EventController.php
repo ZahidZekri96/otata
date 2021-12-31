@@ -64,7 +64,9 @@ class EventController extends Controller
 
         $getEvent = (new Event())->getEventById($id);
 
-        return view('event.list.subviews.detail', compact('title', 'getEvent'));
+        $getRegistered = EventRegister::where('event_id',$id)->with('user')->get();
+
+        return view('event.list.subviews.detail', compact('title', 'getEvent', 'getRegistered'));
     }
 
     public function memberEventDetail($id)
@@ -112,6 +114,7 @@ class EventController extends Controller
                 'price'         => $request->price,
                 'event_date'    => $request->date,
                 'event_time'    => $request->time,
+                'location'      => $request->location,
                 'description'   => $request->description,
             ]);
 
@@ -139,6 +142,7 @@ class EventController extends Controller
             $event->event_date    = $request->event_date;
             $event->event_time    = $request->event_time;
             $event->link          = $request->event_link;
+            $event->location      = $request->location;
             $event->description   = $request->description;
             $event->save();
 

@@ -48,8 +48,16 @@
                             <div class="form-group row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
-                                    <label for="event_date" class="col-form-label">{{ __('Event Link') }}<span style="color:darkred">*</span></label>
+                                    <label for="event_link" class="col-form-label">{{ __('Event Link') }}<span style="color:darkred">*</span></label>
                                     <input type="text" class="form-control" placeholder="{{ __('Enter Event Link') }} ..." id="event_link" name="event_link" value='{{ $getEvent->link }}' >
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <label for="location" class="col-form-label">{{ __('Event Location') }}<span style="color:darkred">*</span></label>
+                                    <input type="text" class="form-control" placeholder="{{ __('Enter Event Location') }} ..." id="location" name="location" value='{{ $getEvent->location }}' >
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -132,7 +140,7 @@ $(document).ready(function () {
         var hold = "{{ $getEvent->banner != null ? $getEvent->banner->filename : 'null' }}";
         if(hold != 'null'){
             $('#event_removeFile, #event_preview').show();
-            document.getElementById("event_preview").src = "../../../../storage/images/"+hold;
+            document.getElementById("event_preview").src = "../../storage/images/"+hold;
             $('#event_current_photo').val(hold);
         }
 
@@ -143,8 +151,8 @@ $(document).ready(function () {
         var data = processSerialize(formData);
 
         let fr = new FormData();
-        let photo = $('#photo').prop('files')[0];
-        let curr_photo = $('#current_photo').val();
+        let photo = $('#event_photo').prop('files')[0];
+        let curr_photo = $('#event_current_photo').val();
         fr.append('photo', photo);
         fr.append('edit', 'yes');
         fr.append('curr_photo', curr_photo);
@@ -164,7 +172,7 @@ $(document).ready(function () {
                 } else{
                     if(photo)
                     {
-                        fr.append('id', data.object.agent);
+                        fr.append('id', data.object);
                         $.ajax({
                             url: "{{ route('event.store.banner') }}",
                             data:fr,
@@ -181,13 +189,13 @@ $(document).ready(function () {
                                     });
                                 } else{
                                     window.location.href = "{{ route('event.list') }}";
-                                    toastr.success('@lang("Agent has been updated")', {timeOut: 5000});
+                                    toastr.success('@lang("Event has been updated")', {timeOut: 5000});
                                 }
                             }
                         });
                     }
                     else {
-                        fr.append('id', data.object.agent);
+                        fr.append('id', data.object);
                         $.ajax({
                             url: "{{ route('event.store.banner') }}",
                             data:fr,
@@ -204,7 +212,7 @@ $(document).ready(function () {
                                     });
                                 } else{
                                     window.location.href = "{{ route('event.list') }}";
-                                    toastr.success('@lang("Agent has been updated")', {timeOut: 5000});
+                                    toastr.success('@lang("Event has been updated")', {timeOut: 5000});
                                 }
                             }
                         });
@@ -217,4 +225,5 @@ $(document).ready(function () {
     });
 });
 </script>
+<script src="{{ asset('js/custm.js') }}"></script>
 @endpush

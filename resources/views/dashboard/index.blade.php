@@ -157,7 +157,7 @@
                                 <tr>
                                     <td>{{ $y }}</td>
                                     <td>{{ $paid->event }}</td>
-                                    <td>{{ $paid->event_date }} {{date("h:i A", strtotime($paid->event_time))}}</td>
+                                    <td>{{  date("d-m-Y", strtotime($paid->event_date)) }} {{date("h:i A", strtotime($paid->event_time))}}</td>
                                     <td><button type="button" class="btn btn-primary btn-sm">{{ ('Detail') }}</button></td>
                                 </tr>
                                 @php 
