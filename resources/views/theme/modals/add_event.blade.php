@@ -1,5 +1,5 @@
 <div class="modal fade" id="addOrderModalside">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" style="max-width:800px" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Event</h5>
@@ -9,23 +9,23 @@
             <div class="modal-body">
                 <form id="register_event">
                     @csrf
-                    <div class="form-group row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <label for="name" class="col-form-label">{{ __('Photo') }}<span style="color:darkred">*</span></label>
-                            <br/>
-                            <img id="preview" class="img-thumbnail" style="display:none;width:350px;">
-                            <div>
-                                <input type="file" name="photo" id="photo" class="file" accept="image/*">
-                                <a class="btn btn-default" id="removeFile" style="display:none;">{{ __('Remove')}}</a>
-                                <input type="hidden" id="current_photo" name="current_photo">
-                            </div>
+                    <div class="form-group">
+                        <label for="name" class="text-black font-w500">{{ __('Photo') }}</label>
+                        <br/>
+                        <img id="preview" class="img-thumbnail" style="display:none;width:350px;">
+                        <div>
+                            <input type="file" name="photo" id="photo" class="file" accept="image/*">
+                            <a class="btn btn-default" id="removeFile" style="display:none;">{{ __('Remove')}}</a>
+                            <input type="hidden" id="current_photo" name="current_photo">
                         </div>
-                        <div class="col-md-1"></div>
                     </div>
                     <div class="form-group">
                         <label class="text-black font-w500">Event Name</label>
                         <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-black font-w500">Event Location</label>
+                        <input type="text" class="form-control" name="location">
                     </div>
                     <div class="form-group">
                         <label class="text-black font-w500">Event Link</label>

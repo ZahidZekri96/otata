@@ -77,11 +77,27 @@
                     <span class="nav-text">Donation</span>
                 </a>
             </li>
-            <li><a class="ai-icon" href="{{ route('member.subscription') }}" aria-expanded="false">
-                    <i class="flaticon-381-television"></i>
-                    <span class="nav-text">Subscription</span>
-                </a>
-            </li>
+            @php
+                if(Auth::user()->usersubscribe != null){
+                    $currentdate = date('Y-m-d');
+                    $validstart =  Auth::user()->usersubscribe->valid_start;
+                    $validend =  Auth::user()->usersubscribe->valid_end;
+                    
+                    $currentdate = date("Y-m-d", strtotime($currentdate));  
+                    $validstart = date("Y-m-d", strtotime($validstart));  
+                    $validend = date("Y-m-d", strtotime($validend)); 
+            @endphp
+                @if(Auth::user()->usersubscribe->status == 'active' && $currentdate >= $validstart && $currentdate <= $validend)
+                <li><a class="ai-icon" href="{{ route('member.subscription') }}" aria-expanded="false">
+                        <i class="flaticon-381-television"></i>
+                        <span class="nav-text">Subscription </span>
+                    </a>
+                </li>
+                @endif
+            @php
+                }
+            @endphp
+            
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-television"></i>
                     <span class="nav-text">Setting</span>
