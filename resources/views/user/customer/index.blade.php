@@ -31,8 +31,8 @@
 										<td>{{ $user->email }}</td>
 										<td>{{ ucfirst($user->type) }}</td>
 										<td>
-											<a href="{{ route('admin.edit', $user->id) }}" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Edit') }}</a>
-											<a href="{{ route('admin.info', $user->id) }}" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Detail') }}</a>
+											<a href="{{ route('customer.edit', $user->id) }}" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Edit') }}</a>
+											<a href="{{ route('customer.info', $user->id) }}" class="btn btn-primary btn-xs" style="margin-right: 5px;">{{ __('Detail') }}</a>
 											<button type="button" class="btn btn-primary btn-sm btn-delete" data-id="{{ $user->id }}" data-name="{{ $user->name }}">{{ ('Delete') }}</button>
 										</td>
 									</tr>

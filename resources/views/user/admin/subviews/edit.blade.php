@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label class="col-form-label" for="text-input"><strong>{{ __('Phone No.') }}</strong></label>
-                                <input class="form-control" id="text-input" type="text" name="phone" value="{{ $dataUser->userinfo->hpnum }}" placeholder="{{ __('Enter Email') }}">
+                                <input class="form-control" id="text-input" type="text" name="phone" value="{{ $dataUser->userinfo->hpnum }}" placeholder="{{ __('Enter Phone No.') }}">
                             </div>
                             <div class="col-md-1"></div>
                         </div>

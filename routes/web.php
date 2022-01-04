@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 Route::group(['prefix' => 'setting'], function(){
     Route::get('/add', 'App\Http\Controllers\SettingController@addUser')->name('setting.user.add');
+    Route::post('/create', 'App\Http\Controllers\SettingController@apiPostStoreUser')->name('setting.user.create');
     Route::put('/update/{id}', 'App\Http\Controllers\SettingController@apiPutUpdateUser')->name('setting.user.update');
     Route::get('/password', 'App\Http\Controllers\SettingController@changePassword')->name('setting.password');
     Route::put('/change-password/{id}', 'App\Http\Controllers\SettingController@putApiUpdatePassword')->name('setting.password.update');

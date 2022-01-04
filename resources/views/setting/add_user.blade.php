@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-md-1"></div>
                         </div>
-                        <form>
+                        <form id="add_user">
                         @csrf
                         <div class="form-group row">
                             <div class="col-md-1"></div>
@@ -59,13 +59,22 @@
                                 </label>
                             </div>
                             <div class="col-md-5">
-                            <label for="name" class="col-form-label"><strong>{{ __('Type') }}</strong><span style="color:darkred">*</span></label>
-                            <select class="form-control" id="type" name="type">
-                                <option value="">{{ __('Select Type') }}</option>
-                                <option value="admin">{{ __('Admin') }}</option>
-                                <option value="member">{{ __('Member') }}</option>
-                                </select>
+                                <label for="name" class="col-form-label"><strong>{{ __('Type') }}</strong><span style="color:darkred">*</span></label>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="">{{ __('Select Type') }}</option>
+                                    <option value="admin">{{ __('Admin') }}</option>
+                                    <option value="member">{{ __('Member') }}</option>
+                                    </select>
+                                </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                <label for="phone" class="col-form-label"><strong>{{ __('Phone No.') }}</strong><span style="color:darkred">*</span></label><br/>
+                                <input type="text" class="form-control" placeholder="{{ __('Enter Phone No.') }}" id="phone" name="phone" required>
                             </div>
+                            <div class="col-md-5"></div>
                             <div class="col-md-1"></div>
                         </div>
                         <hr>
@@ -125,7 +134,7 @@
         var data = processSerialize(formData);
 
         $.ajax({
-            url: "{{ route('customer.store') }}",
+            url: "{{ route('setting.user.create') }}",
             data:data,
             type: "POST",
             dataType: "json",
@@ -136,12 +145,10 @@
                         toastr.error(sm, {timeOut: 5000});
                     });
                 } else{
-                    window.location.href = "{{ route('customer.list') }}";
-                    toastr.success('@lang("New affiliate agent has been added")', {timeOut: 5000});
+                    toastr.success('@lang("New user has been added")', {timeOut: 5000});
                 }
             }
         });
     });
 </script>
-<script src="{{ asset('js/custm.js') }}"></script>
 @endpush

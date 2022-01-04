@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Auth;
 
 use App\Models\User;
-use App\Models\UserInfo;
+use App\Models\UsersInfo;
 
 class SettingController extends Controller
 {
@@ -57,7 +57,7 @@ class SettingController extends Controller
                 'status'    => 1,
             ]);
 
-            $userinfo = UserInfo::create([
+            $userinfo = UsersInfo::create([
                 'user_id'       => $user->id,
                 'gender'        => $request->gender,
                 'address'       => $request->address,
@@ -65,6 +65,7 @@ class SettingController extends Controller
                 'city'          => $request->city,
                 'state'         => $request->state,
                 'country'       => $request->country,
+                'hpnum'         => $request->phone,
             ]);
 
 
