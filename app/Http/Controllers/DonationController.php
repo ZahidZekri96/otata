@@ -49,6 +49,7 @@ class DonationController extends Controller
 
             $donation = Donation::create([
                 'status'            => 'pending',
+                'user_id'           => $request->userid,
                 'order_id'          => $order_id,
                 'cost'              => $request->cost,
                 'payment_type'      => $request->type,

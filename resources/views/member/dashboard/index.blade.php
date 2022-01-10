@@ -110,8 +110,8 @@
                                     <td>{{ $free->event }}</td>
                                     <td>{{ date("d-m-Y", strtotime($free->event_date)) }} {{date("h:i A", strtotime($free->event_time))}}</td>
                                     <td>
-                                        <a href="" data-toggle="modal" data-target="#basicModal" class="mr-4 register" data-id="{{ Auth::user()->id }}" data-event="{{ $free->id }}" data-ename="{{ $free->event }}" data-type="{{ $free->type }}">
-                                            <button type="button" class="btn btn-primary btn-sm">Register</button>
+                                        <a href="{{ route('member.event.detail', $free->id) }}">
+                                            <button type="button" class="btn btn-primary btn-sm">Detail</button>
                                         </a>
                                     </td>
                                 </tr>
@@ -150,8 +150,8 @@
                                     <td>{{ $paid->event }}</td>
                                     <td>{{ $paid->event_date }} {{date("h:i A", strtotime($paid->event_time))}}</td>
                                     <td>
-                                        <a href="" data-toggle="modal" data-target="#basicModal" class="mr-4 register" data-id="{{ Auth::user()->id }}" data-event="{{ $paid->id }}" data-ename="{{ $paid->event }}" data-type="{{ $paid->type }}">
-                                            <button type="button" class="btn btn-primary btn-sm">Register</button>
+										<a href="{{ route('member.event.detail', $paid->id) }}">
+                                            <button type="button" class="btn btn-primary btn-sm">Detail</button>
                                         </a>
                                     </td>
                                 </tr>

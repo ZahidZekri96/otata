@@ -142,14 +142,13 @@ $
                                         $.each(errors, function(index, sm){
                                             toastr.error(sm, {timeOut: 5000});
                                         });
-                                    } else{
-                                        $('#addOrderModalside').hide();
-                                        toastr.success('@lang("New event has been added")', {timeOut: 5000});
                                     }
                                 }
                             });
                         }
                     $('#addOrderModalside').hide();
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
                     toastr.success('@lang("New event has been added")', {timeOut: 5000});
                 }
             }

@@ -53,7 +53,7 @@
 										</tr>
 										<tr>
 											<td>{{ __('Registration Date') }}</td>
-											<td></td>
+											<td>{{ Carbon\Carbon::parse($dataUser->created_at)->format('d/m/Y') }}</td>
 										</tr>
 									</tbody>
 								</table>

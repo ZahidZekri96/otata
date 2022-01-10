@@ -7,13 +7,6 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row" style="margin-bottom: 5px;">
-                            <div class="col-md-10">
-                            </div>
-                            <div class="col-md-2">
-                            <a class="btn btn-default" href="" style="float: right;"><i class="fas fa-arrow-left"></i>&nbsp;{{ __('Back') }}</a>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <div class="col-md-1"></div>
                             <div class="col-md-10">

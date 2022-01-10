@@ -159,7 +159,7 @@
 
                     $.each(data.object.seven, function(index, d){
                         if(z == d.date){
-                            test[t]=[d.count];
+                            test[t]=[d.total_donation];
                         }
                     });
                     
@@ -182,8 +182,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero: true,
-                                    precision:0
+                                    beginAtZero: true
                                 }
                             }]
                         }

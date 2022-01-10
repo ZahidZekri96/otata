@@ -11,7 +11,7 @@
                             <div class="col-md-10">
                             </div>
                             <div class="col-md-2">
-                            <a class="btn btn-default" href="" style="float: right;"><i class="fas fa-arrow-left"></i>&nbsp;{{ __('Back') }}</a>
+                            <a class="btn btn-default" href="{{ route('admin.list') }}" style="float: right;"><i class="fas fa-arrow-left"></i>&nbsp;{{ __('Back') }}</a>
                             </div>
                         </div>
                         <div class="form-group row">

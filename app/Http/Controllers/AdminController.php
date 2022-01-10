@@ -22,7 +22,7 @@ class AdminController extends Controller
 
         $getUser = (new User())->getUserList("*", "ASC", "active", "admin");
 
-        return view('user.customer.index', compact('title', 'getUser'));
+        return view('user.admin.index', compact('title', 'getUser'));
     }
 
     public function add()
