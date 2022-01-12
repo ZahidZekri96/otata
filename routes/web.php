@@ -102,7 +102,7 @@ Route::group(['prefix' => 'subscription'], function(){
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::group(['prefix' => 'member'], function(){
     Route::get('/main', 'App\Http\Controllers\MemberMainController@index')->name('member.main');
