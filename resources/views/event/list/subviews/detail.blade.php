@@ -98,7 +98,7 @@
 				<div class="tab-content">
 					<div id="All" class="tab-pane active fade show">
 						<div class="table-responsive">
-							<table id="example2" class="table card-table display dataTablesCard">
+							<table id="example2" class="table card-table display dataTablesCard text-center">
                                 <thead>
 									<tr>
 										<th>ID</th>
@@ -106,6 +106,7 @@
 										<th>{{ __('E-mail') }}</th>
 										<th>{{ __('Registered Date') }}</th>
 										<th>{{ __('Registered Time') }} </th>
+                                        <th>{{ __('Event Join') }}</th>
 								</thead>
 								<tbody>
 									@php
@@ -118,7 +119,8 @@
 										<td>{{ $registered->user->name}}</td>
 										<td>{{ $registered->user->email}}</td>
 										<td>{{ date("d-m-Y", strtotime($registered->created_at)) }}</td>
-										<td>{{date("h:i A", strtotime($registered->created_at))}}</td>
+										<td>{{ date("h:i A", strtotime($registered->created_at)) }}</td>
+                                        <td>{{ $registered->event_join == 1 ? 'Join' : 'Not Join' }}</td>
 									</tr>
 									@endif
 									@php 

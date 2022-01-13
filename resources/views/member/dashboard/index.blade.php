@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <table id="example2" class="table card-table display dataTablesCard">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th>ID</th>
                                     <th>Event Name</th>
                                     <th>Date & Time</th>
@@ -67,11 +67,14 @@
                                     $y=1
                                 @endphp
                                 @foreach ($getUpcomingEvent as $upcoming)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ $y }}</td>
                                     <td>{{ $upcoming->event->event  }}</td>
                                     <td>{{ date("d-m-Y", strtotime($upcoming->event->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
-                                    <td><a href="{{ $upcoming->event->link }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Redirect') }}</button></a></td>
+                                    <td>
+										<a href="{{ $upcoming->event->link }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Join') }}</button></a>
+										<a href="{{ route('event.detail',$upcoming->event->id) }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Detail') }}</button></a>
+									</td>
                                 </tr>
                                 @php 
                                     $y++
