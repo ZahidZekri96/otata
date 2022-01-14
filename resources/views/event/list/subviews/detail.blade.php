@@ -25,7 +25,7 @@
                             </svg>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{ $getEvent->link }}">Redirect</a>
+                            <a class="dropdown-item" href="{{ $getEvent->link }}">Join</a>
                             </div>
                         </div>
                         </div>

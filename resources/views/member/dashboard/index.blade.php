@@ -73,7 +73,7 @@
                                     <td>{{ date("d-m-Y", strtotime($upcoming->event->event_date)) }} {{date("h:i A", strtotime($upcoming->event_time))}}</td>
                                     <td>
 										<a href="{{ $upcoming->event->link }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Join') }}</button></a>
-										<a href="{{ route('event.detail',$upcoming->event->id) }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Detail') }}</button></a>
+										<a href="{{ route('member.event.detail',$upcoming->event->id) }}"><button type="button" class="btn btn-primary btn-sm">{{ __('Detail') }}</button></a>
 									</td>
                                 </tr>
                                 @php 

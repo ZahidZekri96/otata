@@ -25,7 +25,7 @@
                             </svg>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="javascript:void(0);">Register</a>
+                            <a class="dropdown-item register-event" href="javascript:void(0);" data-event="{{ $getEvent->id }}" data-type="{{ $getEvent->type }}" data-id="{{ Auth::user()->id }}">Register</a>
                             </div>
                         </div>
                         </div>
@@ -97,8 +97,67 @@
     </div>
 </div>
 
+@include('member.event.list.modal.register')
+
 @endsection
 @push('script')
 <script>
+$(document).ready(function(){
+  $(".register-event").click(function(){
+	  
+	var id = $(this).attr("data-id"); 
+	var event = $(this).attr("data-event");
+	var type = $(this).attr("data-type");
+	
+	if(type == 'free'){
+		$.ajax({
+			url: "{{ route('member.register.add') }}",
+			data:{
+				"id": id,
+				"event": event
+			},
+			type: "POST",
+			dataType: "json",
+			success: function(data) {
+				if(data.message != 'success'){
+					var errors = data;
+					$.each(errors, function(index, sm){
+						toastr.error(sm, {timeOut: 5000});
+					});
+				} else{
+					window.location.href = "{{ route('member.event.list') }}";
+					toastr.success('@lang("You have registered the event")', {timeOut: 5000});
+				}
+			}
+		});
+	}else if(type == 'paid'){
+		$.ajax({
+			url: "{{ route('member.register.paid') }}",
+			data:{
+				"id": id,
+				"event": event
+			},
+			type: "POST",
+			dataType: "json",
+			success: function(data) {
+				if(data.message != 'success'){
+					var errors = data;
+					$.each(errors, function(index, sm){
+						toastr.error(sm, {timeOut: 5000});
+					});
+				} else{
+					var url         = "{{ route('senangpay.event.paid', [':id',':order_id']) }}";
+					let order_id = data.object.order_id;
+					
+					url             = url.replace(':id',event);
+					url				= url.replace(':order_id',order_id);
+					window.location.href = url;
+					
+				}
+			}
+		});
+	}
+  });
+});
 </script>
 @endpush
